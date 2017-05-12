@@ -1,0 +1,31 @@
+set gdefault
+set hlsearch
+set ignorecase
+set incsearch
+set matchpairs
+set relativenumber
+set showmode
+set smartcase
+
+" Keep search pattern at the center of screen
+nnoremap <silent>n nzz
+nnoremap <silent>N Nzz
+nnoremap <silent>* *zz
+nnoremap <silent># #zz
+nnoremap <silent>g* g*zz
+nnoremap <silent>g# g#zz
+
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+xnoremap H <gv
+xnoremap L >gv
+
+" IDE mapping
+nnoremap zc :action CollapseRegion<cr>
+nnoremap zo :action ExpandRegion<cr>
+nnoremap gm :action ToggleDistractionFreeMode<cr>
+nnoremap s :action AceJumpAction<cr>
+xnoremap s :action AceJumpAction<cr>

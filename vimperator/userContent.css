@@ -1,0 +1,17 @@
+input {
+  -moz-appearance: none !important;
+  background-color: white;
+  color: black;
+}
+
+textarea {
+  -moz-appearance: none !important;
+  background-color: white;
+  color: black;
+}
+
+select {
+  -moz-appearance: none !important;
+  background-color: white;
+  color: black;
+}

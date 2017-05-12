@@ -1,0 +1,1 @@
+cnoreabbrev nw :noautocmd write
