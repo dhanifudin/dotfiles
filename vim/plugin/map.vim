@@ -6,6 +6,7 @@ noremap k gk
 nnoremap gb :bnext<CR>
 nnoremap gB :bprevious<CR>
 
+nnoremap ; :
 nnoremap ! :!
 
 xnoremap H <gv

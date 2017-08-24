@@ -1,1 +1,1 @@
-/Users/dhanifudin/.vimrc
+vimrc
