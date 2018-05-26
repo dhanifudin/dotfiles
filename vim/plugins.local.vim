@@ -18,8 +18,8 @@ endif
 " deoplete
 Plug 'Shougo/deoplete-rct', { 'for': 'ruby' }
 Plug 'carlitux/deoplete-ternjs', {
-  /'do': 'npm install -g tern',
-  /'for': ['javascript', 'javascript.jsx'] }
+  \'do': 'npm install -g tern',
+  \'for': ['javascript', 'javascript.jsx'] }
 Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby' }
 Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
 Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install', 'for': 'php' }
