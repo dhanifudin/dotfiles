@@ -26,10 +26,10 @@ if has('autocmd')
     autocmd! CmdwinEnter * nnoremap <buffer> q <c-c><c-c>
   augroup END
 
-  augroup goyo
-    autocmd! User GoyoEnter Limelight
-    autocmd! User GoyoLeave Limelight!
-  augroup END
+  " augroup goyo
+  "   autocmd! User GoyoEnter Limelight
+  "   autocmd! User GoyoLeave Limelight!
+  " augroup END
 
   " augroup autoformat
   "   if exists('g:plugs["vim-autoformat"]')

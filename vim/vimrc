@@ -1,105 +1,16 @@
-set shell=zsh\ -l
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   echo 'Installing vim-plug...'
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   echo 'Run :PlugInstall to install plugins'
 endif
 
+let g:ssh_session = $SSH_TTY
+
 call plug#begin('~/.vim/plugged')
-
-" colorschemes
-Plug 'morhetz/gruvbox'
-
-" neovim
-if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'Shougo/deoplete-rct', { 'for': 'ruby' }
-  Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'padawan-php/deoplete-padawan', { 'for': 'php' }
-  Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby' }
-  Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
+if empty(g:ssh_session)
+  source $HOME/.vim/plugins.local.vim
+else
+  source $HOME/.vim/plugins.ssh.vim
 endif
-
-Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-scripts/cmdline-completion'
-
-" general
-Plug 'mileszs/ack.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/context_filetype.vim'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'dhanifudin/neosnippet-snippets'
-Plug 'mbbill/undotree'
-Plug 'mattn/emmet-vim', { 'for': ['blade', 'html', 'css', 'eruby'] }
-Plug 'mattn/webapi-vim'
-Plug 'KabbAmine/gulp-vim'
-
-" tpope
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-
-" textobject
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-function'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-entire'
-Plug 'Julian/vim-textobj-variable-segment'
-
-" eyecandy
-Plug 'vim-airline/vim-airline'
-Plug 'airblade/vim-gitgutter'
-
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
-Plug 'ompugao/ctrlp-history'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'svermeulen/vim-easyclip'
-Plug 'w0rp/ale'
-Plug 'Chiel92/vim-autoformat'
-Plug 'Yggdroot/indentLine'
-Plug 'jiangmiao/auto-pairs'
-Plug 'docunext/closetag.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'majutsushi/tagbar'
-
-Plug 'wakatime/vim-wakatime'
-
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-
-" node
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-
-" php
-Plug 'noahfrederick/vim-composer'
-Plug 'noahfrederick/vim-laravel', { 'for': 'php' }
-Plug 'vim-php/tagbar-phpctags.vim', { 'for': 'php' }
-
-" python
-Plug 'davidhalter/jedi-vim'
-
-" typescript
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
-
-Plug 'bdauria/angular-cli.vim'
-
 call plug#end()

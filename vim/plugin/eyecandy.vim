@@ -16,13 +16,7 @@ let g:airline_exclude_preview = 1
 let g:airline_detect_paste = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'gruvbox'
-let g:airline_section_warning = '%{ALEGetStatusLine()}'
-
-" Airline Extensions
-let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'z', 'warning' ]
-      \ ]
+let g:airline#extensions#ale#enabled = 1
 
 let g:airline_mode_map = {
       \ '__' : '-',

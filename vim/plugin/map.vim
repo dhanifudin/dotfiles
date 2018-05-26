@@ -14,14 +14,14 @@ xnoremap J :m '>+1<Enter>gv=gv
 xnoremap K :m '<-2<Enter>gv=gv
 xnoremap L >gv
 
-" search {{{
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-nnoremap <silent> g* g*zz
-nnoremap <silent> g# g#zz
-" }}}
+" " search {{{
+" nnoremap <silent> n nzz
+" nnoremap <silent> N Nzz
+" nnoremap <silent> * *zz
+" nnoremap <silent> # #zz
+" nnoremap <silent> g* g*zz
+" nnoremap <silent> g# g#zz
+" " }}}
 
 
 " navigation command mode {{{
