@@ -38,7 +38,9 @@ if has('autocmd')
   " augroup END
 
   augroup snippet
-    autocmd InsertLeave * call s:neosnippetEvent()
+    if exists('g:plugs["neosnippet.vim"]')
+      autocmd InsertLeave * call s:neosnippetEvent()
+    endif
   augroup END
 
   augroup java
