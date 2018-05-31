@@ -4,15 +4,16 @@ Plug 'morhetz/gruvbox'
 " neovim
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  if executable('pyenv')
-    let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
-    let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
-  endif
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+if executable('pyenv')
+  let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
+  let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
 endif
 
 " deoplete
