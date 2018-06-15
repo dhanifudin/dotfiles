@@ -24,7 +24,6 @@ Plug 'carlitux/deoplete-ternjs', {
 Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby' }
 Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
 Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install', 'for': 'php' }
-Plug 'zchee/deoplete-go', { 'for': 'go' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 " filetypes
@@ -103,7 +102,10 @@ Plug 'majutsushi/tagbar'
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 
 " golang
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+if executable('go')
+  Plug 'zchee/deoplete-go', { 'for': 'go' }
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+endif
 
 " node
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
