@@ -18,12 +18,8 @@ endif
 
 " deoplete
 Plug 'Shougo/deoplete-rct', { 'for': 'ruby' }
-Plug 'carlitux/deoplete-ternjs', {
-  \'do': 'npm install -g tern',
-  \'for': ['javascript', 'javascript.jsx'] }
 Plug 'fishbullet/deoplete-ruby', { 'for': 'ruby' }
 Plug 'mhartington/nvim-typescript', { 'for': 'typescript' }
-Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install', 'for': 'php' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 
 " filetypes
@@ -99,7 +95,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 
 " java
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+if executable('java')
+  Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+endif
 
 " golang
 if executable('go')
@@ -108,12 +106,20 @@ if executable('go')
 endif
 
 " node
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'bdauria/angular-cli.vim'
+if executable('node')
+  Plug 'carlitux/deoplete-ternjs', {
+    \'do': 'npm install -g tern',
+    \'for': ['javascript', 'javascript.jsx'] }
+  Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
+  Plug 'bdauria/angular-cli.vim'
+endif
 
 " php
-Plug 'noahfrederick/vim-composer'
-Plug 'noahfrederick/vim-laravel'
-Plug 'vim-php/tagbar-phpctags.vim'
+if executable('php')
+  Plug 'padawan-php/deoplete-padawan', { 'do': 'composer install', 'for': 'php' }
+  Plug 'noahfrederick/vim-composer'
+  Plug 'noahfrederick/vim-laravel'
+  Plug 'vim-php/tagbar-phpctags.vim'
+endif
 
 Plug 'wakatime/vim-wakatime'
