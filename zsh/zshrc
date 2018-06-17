@@ -1,0 +1,17 @@
+export ZPLUG_HOME=$HOME/.zplug
+source $ZPLUG_HOME/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+export ZIM_HOME=$ZPLUG_REPOS/zimfw/zimfw
+zplug "zimfw/zimfw", use:init.zsh
+# Zim settings
+zmodules=(directory environment history input utility autosuggestions \
+          syntax-highlighting history-substring-search completion fasd)
+
+ztermtitle='%n@%m:%~'
+
+zplug 'petervanderdoes/git-flow-completion', use:git-flow-competion.zsh
+zplug 'denysdovhan/spaceship-prompt', use:spaceship.zsh, as:theme
+zplug '~/.zsh', from:local
+
+zplug load
