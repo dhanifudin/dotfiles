@@ -122,4 +122,8 @@ if executable('php')
   Plug 'vim-php/tagbar-phpctags.vim'
 endif
 
+" notes
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+
 Plug 'wakatime/vim-wakatime'
