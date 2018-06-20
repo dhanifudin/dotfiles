@@ -14,6 +14,8 @@ zplug 'petervanderdoes/git-flow-completion', use:git-flow-competion.zsh
 zplug 'denysdovhan/spaceship-prompt', use:spaceship.zsh, as:theme
 zplug '~/.zsh', from:local
 
-SPACESHIP_CHAR_SYMBOL='•◦• '
+SPACESHIP_CHAR_PREFIX='•'
+SPACESHIP_CHAR_SUFFIX='• '
+SPACESHIP_CHAR_SYMBOL='•'
 
 zplug load
