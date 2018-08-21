@@ -5,7 +5,7 @@ root                     = true
 [*]
 charset                  = utf-8
 end_of_line              = lf
-insert_final_newline     = true
+insert_final_newline     = false
 max_line_length          = 80
 trim_trailing_whitespace = true
 indent_style             = space
@@ -27,3 +27,11 @@ indent_size  = 4
 [*.php]
 indent_style = space
 indent_size  = 4
+
+[*.snip]
+indent_style = tab
+indent_size = 4
+
+[*.blade.php]
+indent_style = space
+indent_size = 2
