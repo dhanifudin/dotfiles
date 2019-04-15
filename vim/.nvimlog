@@ -1,0 +1,2 @@
+ERROR 2019-04-16T03:17:28.146 37074 os_proc_tree_kill:104: getpgid(37080) returned -1
+ERROR 2019-04-16T03:17:28.146 37074 os_proc_tree_kill:104: getpgid(37178) returned -1

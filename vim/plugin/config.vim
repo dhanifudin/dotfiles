@@ -11,6 +11,7 @@ endif
 
 set path+=**
 set clipboard=unnamed
+set termguicolors
 
 " cursor
 set cursorline

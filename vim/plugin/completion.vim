@@ -1,51 +1,16 @@
-" vim: set foldmethod=marker:
+if exists('g:plugs["coc.nvim"]')
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CompletionTab()
-  if neosnippet#expandable_or_jumpable()
-    return "\<Plug>(neosnippet_expand_or_jump)"
-  elseif pumvisible()
-    return "\<C-n>"
-  elseif getline('.')[col('.') - 1] =~# '["\]'')}]'
-    return "\<Right>"
-  else
-    return "\<TAB>"
-  endif
-endfunction
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? coc#_select_confirm() :
+        \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
 
-" deoplete {{{
-if exists('g:plugs["deoplete.nvim"]')
-  " let g:deoplete#auto_complete_start_length = 0
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_camel_case = 1
-  let g:deoplete#enable_smart_case = 1
-  " let g:deoplete#sources = {}
-  " let g:deoplete#sources._ = ['buffer', 'neosnippet']
-  " let g:deoplete#sources.typescript = ['buffer', 'tsuquyomi', 'neosnippet']
-  let g:deoplete#omni#input_patterns = {}
-  let g:deoplete#omni#input_patterns.typescript = ['[^. \t0-9]\.\w*']
-  " let g:tsuquyomi_completion_detail = 1
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+  endfunction
 
-  imap <silent><expr><TAB> CompletionTab()
-
-  smap <silent><expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-  imap <silent><expr><S-TAB> pumvisible() ?
-        \ "\<C-p>" : "\<S-TAB>"
-
-  " imap <C-R>=.<CR> pumvisible() ?
-  "       \ deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
-
-  " imap <CR> <C-R>=pumvisible() ? deoplete#mappings#close_popup() : "\n"<CR>
-  " }}}
-
-  " deoplete-padawan {{{
-  if exists('g:plugs["deoplete-padawan"]')
-    let g:deoplete#sources#padawan#add_parentheses = 1
-    command! StartPadawan call deoplete#sources#padawan#StartServer()
-    command! StopPadawan call deoplete#sources#padawan#StopServer()
-    command! RestartPadawan call deoplete#sources#padawan#RestartServer()
-  endif
-  " }}}
-
+  let g:coc_snippet_next = '<tab>'
 endif

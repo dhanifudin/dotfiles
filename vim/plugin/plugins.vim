@@ -6,17 +6,6 @@ if executable('ag')
 endif
 " }}}
 
-" {{{ ale
-let g:ale_sign_error = '⨉'
-let g:ale_sign_warning = '⚠ '
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '✓']
-
-let g:ale_linters = {
-      \ 'html': ['htmlhint'],
-      \ 'javascript': ['eslint'],
-      \ }
-" }}}
-
 " {{{ goyo
 " let g:goyo_width = 81
 " let g:goyo_margin_top = 2

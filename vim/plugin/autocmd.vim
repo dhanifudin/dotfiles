@@ -1,12 +1,5 @@
 " vim: set foldmethod=marker:
 
-function! s:neosnippetEvent()
-  NeoSnippetClearMarkers
-  if pumvisible() == 0
-    pclose
-  endif
-endfunction
-
 if has('autocmd')
 
   augroup config
@@ -16,9 +9,9 @@ if has('autocmd')
 
     " Remember last cursor position
     autocmd BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal! g`\"" |
-          \ endif
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
 
   augroup END
 
@@ -26,34 +19,12 @@ if has('autocmd')
     autocmd! CmdwinEnter * nnoremap <buffer> q <c-c><c-c>
   augroup END
 
-  " augroup goyo
-  "   autocmd! User GoyoEnter Limelight
-  "   autocmd! User GoyoLeave Limelight!
-  " augroup END
-
-  " augroup autoformat
-  "   if exists('g:plugs["vim-autoformat"]')
-  "     autocmd! BufWritePre * :Autoformat
-  "   endif
-  " augroup END
-
-  augroup snippet
-    if exists('g:plugs["neosnippet.vim"]')
-      autocmd InsertLeave * call s:neosnippetEvent()
-    endif
-  augroup END
-
-  augroup java
-    autocmd!
-    autocmd FileType java setlocal omnifunc=javacomplete#Complete
-  augroup END
-
   augroup ng
     autocmd!
     autocmd VimEnter *
-          \ if globpath('.,..','node_modules/@angular') != '' |
-          \ call angular_cli#init() |
-          \ endif
+      \ if globpath('.,..','node_modules/@angular') != '' |
+      \ call angular_cli#init() |
+      \ endif
   augroup END
 
 endif

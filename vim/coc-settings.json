@@ -1,0 +1,13 @@
+{
+  "coc.preferences.formatOnType": true,
+  "javascript.validate.enable": false,
+  "javascript.preferences.noSemicolons": true,
+  "javascript.preferences.quoteStyle": "single",
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  }
+}

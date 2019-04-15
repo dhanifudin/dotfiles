@@ -1,7 +1,7 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
   echo 'Installing vim-plug...'
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   echo 'Run :PlugInstall to install plugins'
 endif
 
@@ -9,8 +9,8 @@ let g:ssh_session = $SSH_TTY
 
 call plug#begin('~/.vim/plugged')
 if empty(g:ssh_session)
-  source $HOME/.vim/plugins.local.vim
+  source $HOME/.vim/local.plugins.vim
 else
-  source $HOME/.vim/plugins.ssh.vim
+  source $HOME/.vim/ssh.plugins.vim
 endif
 call plug#end()
