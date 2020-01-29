@@ -1,21 +1,36 @@
 export ZPLUG_HOME=$HOME/.zplug
 source $ZPLUG_HOME/init.zsh
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
 export ZIM_HOME=$ZPLUG_REPOS/zimfw/zimfw
-zplug "zimfw/zimfw", use:init.zsh
-# Zim settings
-zmodules=(directory environment history input utility autosuggestions \
-          syntax-highlighting history-substring-search completion fasd)
 
-ztermtitle='%n@%m:%~'
-
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug 'zimfw/zimfw', use:init.zsh, at:zsh-5.2
 zplug 'petervanderdoes/git-flow-completion', use:git-flow-competion.zsh
 zplug 'denysdovhan/spaceship-prompt', use:spaceship.zsh, as:theme
 zplug '~/.zsh', from:local
 
-SPACESHIP_CHAR_PREFIX='•'
-SPACESHIP_CHAR_SUFFIX='• '
-SPACESHIP_CHAR_SYMBOL='•'
+# Zim settings
+zmodules=(
+  directory \
+  environment \
+  history \
+  input \
+  utility \
+  autosuggestions \
+  syntax-highlighting \
+  history-substring-search \
+  completion \
+  fasd
+)
+
+ztermtitle='%n@%m:%~'
+
+SPACESHIP_PROMPT_ADD_NEWLINE="true"
+SPACESHIP_CHAR_SYMBOL="🙈🙉🙊"
+SPACESHIP_CHAR_SUFFIX=" "
+SPACESHIP_CHAR_COLOR_SUCCESS="yellow"
+SPACESHIP_PROMPT_DEFAULT_PREFIX="$USER"
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW="true"
+SPACESHIP_USER_SHOW="true"
+SPACESHIP_PYTHON_SHOW="false"
 
 zplug load
