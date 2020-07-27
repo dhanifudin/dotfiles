@@ -12,23 +12,25 @@ else
   export GOROOT=/usr/lib/go
 fi
 
-export GOPATH=$HOME/Projects/golang
-export PYENV_ROOT=$HOME/.pyenv
-export PHPBREW_RC_ENABLE=1
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export GOPATH=$HOME/Workspaces/golang
+# export PYENV_ROOT=$HOME/.pyenv
+# export PHPBREW_RC_ENABLE=1
+# export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-[[ -e $HOME/.phpbrew/bashrc ]] && source $HOME/.phpbrew/bashrc
+# [[ -e $HOME/.phpbrew/bashrc ]] && source $HOME/.phpbrew/bashrc
 [[ -e $HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh ]] && source $HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh
 
 path=(
   $GOROOT/bin
   $GOPATH/bin
-  $PYENV_ROOT/bin
-  $HOME/{bin,.composer/vendor/bin,.local/bin}
+  # $PYENV_ROOT/bin
+  $HOME/{bin,.cargo/bin,.composer/vendor/bin,.local/bin}
   $path
 )
 
 eval "$(thefuck --alias)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-eval "$(fnm env --multi)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+# eval "$(fnm env --multi)"
+eval "$(direnv hook zsh)"
+. $HOME/.asdf/asdf.sh

@@ -3,6 +3,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set matchpairs
+set number
 set relativenumber
 set showmode
 set smartcase
@@ -20,6 +21,8 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+nnoremap ; :
+
 xnoremap H <gv
 xnoremap L >gv
 
@@ -27,5 +30,3 @@ xnoremap L >gv
 nnoremap zc :action CollapseRegion<cr>
 nnoremap zo :action ExpandRegion<cr>
 nnoremap gm :action ToggleDistractionFreeMode<cr>
-nnoremap s :action AceJumpAction<cr>
-xnoremap s :action AceJumpAction<cr>

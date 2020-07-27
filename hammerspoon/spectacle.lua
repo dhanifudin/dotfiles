@@ -1,4 +1,5 @@
 local appkey = {'cmd', 'alt'}
+local hotkey = hs.hotkey.modal.new(appkey)
 
 function baseMove(x, y, w, h)
   return function()
@@ -15,14 +16,16 @@ function baseMove(x, y, w, h)
   end
 end
 
-hs.hotkey.bind(appkey, 'f', baseMove(0, 0, 1, 1))
+hotkey:bind(appkey, 'f', nil, baseMove(0, 0, 1, 1))
 
-hs.hotkey.bind(appkey, 'h', baseMove(0, 0, 0.5, 1))
-hs.hotkey.bind(appkey, 'j', baseMove(0, 0.5, 1, 0.5))
-hs.hotkey.bind(appkey, 'k', baseMove(0, 0, 1, 0.5))
-hs.hotkey.bind(appkey, 'l', baseMove(0.5, 0, 0.5, 1))
+hotkey:bind(appkey, 'h', nil, baseMove(0, 0, 0.5, 1))
+hotkey:bind(appkey, 'j', nil, baseMove(0, 0.5, 1, 0.5))
+hotkey:bind(appkey, 'k', nil, baseMove(0, 0, 1, 0.5))
+hotkey:bind(appkey, 'l', nil, baseMove(0.5, 0, 0.5, 1))
 
-hs.hotkey.bind(appkey, 'Left', baseMove(0, 0, 0.5, 1))
-hs.hotkey.bind(appkey, 'Down', baseMove(0, 0.5, 1, 0.5))
-hs.hotkey.bind(appkey, 'Up', baseMove(0, 0, 1, 0.5))
-hs.hotkey.bind(appkey, 'Right', baseMove(0.5, 0, 0.5, 1))
+hotkey:bind(appkey, 'Left', nil, baseMove(0, 0, 0.5, 1))
+hotkey:bind(appkey, 'Down', nil, baseMove(0, 0.5, 1, 0.5))
+hotkey:bind(appkey, 'Up', nil, baseMove(0, 0, 1, 0.5))
+hotkey:bind(appkey, 'Right', nil, baseMove(0.5, 0, 0.5, 1))
+
+return hotkey

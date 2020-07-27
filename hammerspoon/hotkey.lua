@@ -1,40 +1,20 @@
 local application = require 'hs.application'
-local hotkey = require 'hs.hotkey'
 local appkey = {'cmd', 'alt'}
+local hotkey = hs.hotkey.modal.new(appkey)
 
-hotkey.bind(appkey, 'r', function()
+function focus(app)
+  return function()
+    application.launchOrFocus(app)
+  end
+end
+
+hotkey:bind(appkey, 'r', nil, function()
   hs.reload()
-  hs.alert('Reload hammerspoon configuration.')
+  hs.alert.show('Reload hammerspoon configuration.')
 end)
 
-hotkey.bind(appkey, 'a', function()
-  application.launchOrFocus('Android Studio.app')
-end)
+hotkey:bind(appkey, 'w', nil, focus('Firefox'))
+hotkey:bind(appkey, 't', nil, focus('iTerm.app'))
+hotkey:bind(appkey, 's', nil, focus('Spotify.app'))
 
-hotkey.bind(appkey, 'c', function()
-  application.launchOrFocus('Google Chrome.app')
-end)
-
-hotkey.bind(appkey, 'w', function()
-  application.launchOrFocus('Firefox.app')
-end)
-
-hotkey.bind(appkey, 'i', function()
-  application.launchOrFocus('IntelliJ IDEA CE.app')
-end)
-
-hotkey.bind(appkey, 't', function()
-  application.launchOrFocus('iTerm.app')
-end)
-
-hotkey.bind(appkey, 'e', function()
-  application.launchOrFocus('Emacs.app')
-end)
-
-hotkey.bind(appkey, 'm', function()
-  application.launchOrFocus('Rambox.app')
-end)
-
-hotkey.bind(appkey, 'z', function()
-  application.launchOrFocus('Zeal.app')
-end)
+return hotkey

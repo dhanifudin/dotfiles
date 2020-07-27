@@ -1,6 +1,9 @@
 -- require 'escape'
-require 'hotkey'
+-- require 'hotkey'
 require 'misc'
-require 'modal'
+-- require 'modal'
 -- require 'tiling'
-require 'spectacle'
+-- require 'spectacle'
+require 'watcher'
+-- local vimouse = require('vimouse')
+-- vimouse('cmd', 'm')
