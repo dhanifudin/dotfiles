@@ -1,13 +1,25 @@
 {
-  "coc.preferences.formatOnType": true,
-  "javascript.validate.enable": false,
-  "javascript.preferences.noSemicolons": true,
+  "coc.preferences.formatOnSaveFiletypes": ["css"],
+  "emmet.includeLanguages": {"vue-html": "html"},
+  "javascript.validate.enable": true,
+  "javascript.suggestionActions.enabled": false,
   "javascript.preferences.quoteStyle": "single",
   "languageserver": {
     "golang": {
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
+    },
+    "intelephense": {
+      "command": "intelephense",
+      "args": ["--stdio"],
+      "filetypes": ["php"],
+      "initializationOptions": {
+        "storagePath": "/tmp/intelephense"
+      }
     }
-  }
+  },
+  "snippets.ultisnips.directories": [
+    "gosnippets/UltiSnips"
+  ]
 }

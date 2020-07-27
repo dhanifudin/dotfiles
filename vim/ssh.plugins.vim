@@ -4,7 +4,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 
 " general
-Plug 'EinfachToll/DidYouMean'
 Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
 Plug 'roman/golden-ratio'
@@ -17,7 +16,6 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -29,12 +27,6 @@ Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-entire'
 Plug 'Julian/vim-textobj-variable-segment'
-
-" junegunn
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-slash'
 
 " ctrlp
 Plug 'ctrlpvim/ctrlp.vim'

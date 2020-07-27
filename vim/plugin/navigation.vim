@@ -1,5 +1,5 @@
 " ctrlp {{{
-let g:ctrlp_map = '<leader>f'
+let g:ctrlp_map = 'gof'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_open_new_file = 'r'
 
@@ -9,10 +9,10 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-nnoremap <leader>b :CtrlPBuffer<CR>
-nnoremap <leader>h :CtrlPCmdHistory<CR>
-nnoremap <leader>s :CtrlPFunky<CR>
-nnoremap <leader>c :CtrlPCmdPalette<CR>
+nnoremap gob :CtrlPBuffer<CR>
+nnoremap goh :CtrlPCmdHistory<CR>
+nnoremap gos :CtrlPFunky<CR>
+nnoremap goc :CtrlPCmdPalette<CR>
 " }}}
 
 " netrw {{{
@@ -25,7 +25,7 @@ let g:netrw_winsize = 20
 " netrw }}}
 
 " easymotion {{{
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+let g:EasyMotion_keys = 'qwerasdfzxcv'
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 1
 let g:EasyMotion_smartcase = 1
@@ -42,12 +42,3 @@ if exists('g:plugs["tagbar"]')
   let g:tagbar_compact = 1
   let g:tagbar_width = 24
 endif
-
-" if exists('g:plugs["vim-unimpaired"]')
-"   nmap < [
-"   nmap > ]
-"   omap < [
-"   omap > ]
-"   xmap < [
-"   xmap > ]
-" endif

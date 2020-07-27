@@ -5,12 +5,12 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install() }}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-if executable('pyenv')
-  let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
-  let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
-endif
+" if executable('pyenv')
+"   let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
+"   let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
+" endif
 
 " filetypes
 Plug 'chrisbra/csv.vim'
@@ -29,12 +29,13 @@ Plug 'mbbill/undotree'
 Plug 'mattn/webapi-vim'
 Plug 'KabbAmine/gulp-vim'
 Plug 'EinfachToll/DidYouMean'
+Plug 'jiangmiao/auto-pairs'
 
 " tpope
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
-" Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
@@ -50,6 +51,7 @@ Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-entire'
 Plug 'Julian/vim-textobj-variable-segment'
+Plug 'thinca/vim-textobj-function-javascript'
 
 " eyecandy
 Plug 'vim-airline/vim-airline'
@@ -70,23 +72,18 @@ Plug 'tacahiroy/ctrlp-funky'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'svermeulen/vim-easyclip'
-Plug 'w0rp/ale'
-Plug 'Chiel92/vim-autoformat'
 Plug 'Yggdroot/indentLine'
 Plug 'docunext/closetag.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 
-" java
-" if executable('java')
-"   Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
-" endif
+if executable('python')
+  Plug 'davidhalter/jedi-vim'
+endif
 
-" " golang
-" if executable('go')
-"   Plug 'zchee/deoplete-go', { 'for': 'go' }
-"   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" endif
+if executable('go')
+  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+endif
 
 " node
 if executable('node')
