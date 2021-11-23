@@ -1,28 +1,26 @@
 # top-most Editorconfig file
 root                     = true
 
-# All Section {{{ #
 [*]
-charset                  = utf-8
-end_of_line              = lf
-insert_final_newline     = false
-max_line_length          = 80
+charset = utf-8
+end_of_line = lf
+insert_final_newline = false
+max_line_length = 80
 trim_trailing_whitespace = true
-indent_style             = space
-indent_size              = 2
-# }}} All Section #
+indent_style = space
+indent_size = 2
 
-# Gradle {{{ #
 [*.gradle]
 indent_style = space
 indent_size  = 4
-# }}} Gradle #
 
-# Java Section {{{ #
 [*.java]
 indent_style = tab
 indent_size  = 4
-# }}} Java Section #
+
+[*.kt]
+indent_style = space
+indent_size = 4
 
 [*.php]
 indent_style = space
@@ -39,3 +37,7 @@ indent_size = 2
 [*.xml]
 indent_style = tab
 indent_size = 4
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
