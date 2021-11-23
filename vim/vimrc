@@ -5,12 +5,50 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   echo 'Run :PlugInstall to install plugins'
 endif
 
-let g:ssh_session = $SSH_TTY
-
 call plug#begin('~/.vim/plugged')
-if empty(g:ssh_session)
-  source $HOME/.vim/local.plugins.vim
-else
-  source $HOME/.vim/ssh.plugins.vim
-endif
+" completion
+Plug 'ackyshake/VimCompletesMe'
+Plug 'docunext/closetag.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/cmdline-completion'
+
+" eyecandy
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'Yggdroot/indentLine'
+
+" tpope
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
+
+" textobject
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'Julian/vim-textobj-variable-segment'
+
+" ctrlp
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+Plug 'ompugao/ctrlp-history'
+
+" navigation
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'easymotion/vim-easymotion'
+
+" misc
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mbbill/undotree'
+Plug 'mileszs/ack.vim'
+Plug 'roman/golden-ratio'
+Plug 'svermeulen/vim-easyclip'
+Plug 'wakatime/vim-wakatime'
 call plug#end()
