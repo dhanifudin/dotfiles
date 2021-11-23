@@ -1,3 +1,6 @@
+let mapleader="\<Space>"
+
+set easymotion
 set gdefault
 set hlsearch
 set ignorecase
@@ -7,6 +10,8 @@ set number
 set relativenumber
 set showmode
 set smartcase
+
+map <Leader> <Plug>(easymotion-prefix)
 
 " Keep search pattern at the center of screen
 nnoremap <silent>n nzz
