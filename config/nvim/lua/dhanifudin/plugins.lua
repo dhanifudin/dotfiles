@@ -16,14 +16,15 @@ vim.cmd("packadd packer.nvim")
 require("packer").startup(function(use)
   use {'lewis6991/impatient.nvim', config = [[require('impatient')]]}
 
-  use({"wbthomason/packer.nvim", opt = true})
-  use({"onsails/lspkind-nvim"})
+  use {"wbthomason/packer.nvim", opt = true}
+  use {"onsails/lspkind-nvim"}
 
   use {"gruvbox-community/gruvbox"}
   use {"svermeulen/vim-cutlass"}
   use {"svermeulen/vim-yoink"}
   use {"editorconfig/editorconfig-vim"}
   use {"voldikss/vim-floaterm"}
+  use {"mbbill/undotree"}
 
   use {
     "nvim-telescope/telescope.nvim",
@@ -51,7 +52,7 @@ require("packer").startup(function(use)
   use {"vim-airline/vim-airline-themes"}
 
   use {"windwp/nvim-autopairs"}
-  use {"windwp/nvim-ts-autotag", after = "nvim-treesitter"}
+  use {"windwp/nvim-ts-autotag"}
 
   use {"tpope/vim-commentary"}
   use {"tpope/vim-dadbod"}
