@@ -1,8 +1,8 @@
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = "maintained",
-	highlight = {
-		enable = true,
-	},
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
   textobjects = {
     select = {
       enable = true,

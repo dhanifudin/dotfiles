@@ -20,6 +20,7 @@ require("packer").startup(function(use)
   use {"onsails/lspkind-nvim"}
 
   use {"gruvbox-community/gruvbox"}
+  use {"lukas-reineke/indent-blankline.nvim"}
   use {"svermeulen/vim-cutlass"}
   use {"svermeulen/vim-yoink"}
   use {"editorconfig/editorconfig-vim"}
@@ -35,9 +36,11 @@ require("packer").startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ':TSUpdate'
   }
+
   -- auto-completion engine
-  use { "neovim/nvim-lspconfig" }
+  use {"neovim/nvim-lspconfig"}
   use {"hrsh7th/nvim-cmp"}
+  use {"tami5/lspsaga.nvim"}
 
   -- nvim-cmp completion sources
   use {"hrsh7th/cmp-nvim-lsp"}
@@ -47,6 +50,9 @@ require("packer").startup(function(use)
   use {"hrsh7th/cmp-vsnip"}
   use {"hrsh7th/vim-vsnip"}
   use {"akinsho/flutter-tools.nvim"}
+
+  use {"h4kst3r/php-awesome-snippets"}
+  use {"xabikos/vscode-javascript"}
 
   use {"vim-airline/vim-airline"}
   use {"vim-airline/vim-airline-themes"}
@@ -64,6 +70,8 @@ require("packer").startup(function(use)
   use {"tpope/vim-surround"}
   use {"tpope/vim-unimpaired"}
   use {"tpope/vim-vinegar"}
+
+  use {"mhartington/formatter.nvim"}
 
   use {"christoomey/vim-tmux-navigator"}
   use {"easymotion/vim-easymotion"}
