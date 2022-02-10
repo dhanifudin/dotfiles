@@ -31,6 +31,17 @@ require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = {{'nvim-lua/plenary.nvim'}}
   }
+
+  use {
+    "lewis6991/gitsigns.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim"
+    },
+    config = function ()
+      require("gitsigns").setup()
+    end
+  }
+
   use {"nvim-telescope/telescope-file-browser.nvim"}
   use {
     "nvim-treesitter/nvim-treesitter",
