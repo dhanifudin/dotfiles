@@ -14,9 +14,9 @@ end
 vim.cmd("packadd packer.nvim")
 
 require("packer").startup(function(use)
+  use {"wbthomason/packer.nvim", opt = true}
   use {'lewis6991/impatient.nvim', config = [[require('impatient')]]}
 
-  use {"wbthomason/packer.nvim", opt = true}
   use {"onsails/lspkind-nvim"}
 
   use {"gruvbox-community/gruvbox"}
@@ -26,6 +26,31 @@ require("packer").startup(function(use)
   use {"editorconfig/editorconfig-vim"}
   use {"voldikss/vim-floaterm"}
   use {"mbbill/undotree"}
+
+  -- auto-completion engine
+  use {"neovim/nvim-lspconfig"}
+  use {"hrsh7th/nvim-cmp"}
+  use {"tami5/lspsaga.nvim"}
+
+  -- nvim-cmp completion sources
+  use {"hrsh7th/cmp-nvim-lsp"}
+  use {"hrsh7th/cmp-nvim-lua"}
+  use {"hrsh7th/cmp-path"}
+  use {"hrsh7th/cmp-buffer"}
+  use {"hrsh7th/cmp-vsnip"}
+  use {"hrsh7th/vim-vsnip"}
+  use {"akinsho/flutter-tools.nvim"}
+
+  use {"h4kst3r/php-awesome-snippets"}
+  use {"jmsv/vscode-javascript-standard"}
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ':TSUpdate'
+  }
+  use {"wakatime/vim-wakatime"}
+  use {"tpope/vim-vinegar"}
+
+  use { "easymotion/vim-easymotion", }
 
   use {
     "nvim-telescope/telescope.nvim",
@@ -43,27 +68,6 @@ require("packer").startup(function(use)
   }
 
   use {"nvim-telescope/telescope-file-browser.nvim"}
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ':TSUpdate'
-  }
-
-  -- auto-completion engine
-  use {"neovim/nvim-lspconfig"}
-  use {"hrsh7th/nvim-cmp"}
-  use {"tami5/lspsaga.nvim"}
-
-  -- nvim-cmp completion sources
-  use {"hrsh7th/cmp-nvim-lsp"}
-  use {"hrsh7th/cmp-nvim-lua"}
-  use {"hrsh7th/cmp-path"}
-  use {"hrsh7th/cmp-buffer"}
-  use {"hrsh7th/cmp-vsnip"}
-  use {"hrsh7th/vim-vsnip"}
-  use {"akinsho/flutter-tools.nvim"}
-
-  use {"h4kst3r/php-awesome-snippets"}
-  use {"xabikos/vscode-javascript"}
 
   use {"vim-airline/vim-airline"}
   use {"vim-airline/vim-airline-themes"}
@@ -80,11 +84,13 @@ require("packer").startup(function(use)
   use {"tpope/vim-repeat"}
   use {"tpope/vim-surround"}
   use {"tpope/vim-unimpaired"}
-  use {"tpope/vim-vinegar"}
 
   use {"mhartington/formatter.nvim"}
 
   use {"christoomey/vim-tmux-navigator"}
-  use {"easymotion/vim-easymotion"}
-  use {"wakatime/vim-wakatime"}
+
+  use {
+    "Julian/vim-textobj-variable-segment",
+    requires = {"kana/vim-textobj-user"}
+  }
 end)

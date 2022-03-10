@@ -1,13 +1,18 @@
-require('dhanifudin.mapping')
-require('dhanifudin.plugins')
-require('dhanifudin.config')
-require('dhanifudin.airline')
-require('dhanifudin.blankline')
-require('dhanifudin.lsp')
-require('dhanifudin.lspsaga')
-require('dhanifudin.telescope')
-require('dhanifudin.treesitter')
-require('dhanifudin.formatter')
-require('dhanifudin.easymotion')
-require('dhanifudin.cutlass')
-require('dhanifudin.yoink')
+local is_vscode = vim.api.nvim_eval('exists("g:vscode")') == 1
+
+if not is_vscode then
+  require('dhanifudin.lsp')
+  require('dhanifudin.lspsaga')
+  require('dhanifudin.treesitter')
+
+  require('dhanifudin.easymotion')
+  require('dhanifudin.cutlass')
+  require('dhanifudin.yoink')
+  require('dhanifudin.mapping')
+  require('dhanifudin.plugins')
+  require('dhanifudin.config')
+  require('dhanifudin.airline')
+  require('dhanifudin.blankline')
+  require('dhanifudin.telescope')
+  require('dhanifudin.formatter')
+end
