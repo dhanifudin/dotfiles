@@ -21,8 +21,7 @@ require("packer").startup(function(use)
 
   use {"gruvbox-community/gruvbox"}
   use {"lukas-reineke/indent-blankline.nvim"}
-  use {"svermeulen/vim-cutlass"}
-  use {"svermeulen/vim-yoink"}
+  use {"svermeulen/vim-easyclip"}
   use {"editorconfig/editorconfig-vim"}
   use {"voldikss/vim-floaterm"}
   use {"mbbill/undotree"}
@@ -50,7 +49,7 @@ require("packer").startup(function(use)
   use {"wakatime/vim-wakatime"}
   use {"tpope/vim-vinegar"}
 
-  use { "easymotion/vim-easymotion", }
+  use { "easymotion/vim-easymotion" }
 
   use {
     "nvim-telescope/telescope.nvim",
@@ -69,8 +68,12 @@ require("packer").startup(function(use)
 
   use {"nvim-telescope/telescope-file-browser.nvim"}
 
-  use {"vim-airline/vim-airline"}
-  use {"vim-airline/vim-airline-themes"}
+  -- use {"vim-airline/vim-airline"}
+  -- use {"vim-airline/vim-airline-themes"}
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true }
+  }
 
   use {"windwp/nvim-autopairs"}
   use {"windwp/nvim-ts-autotag"}
@@ -85,6 +88,7 @@ require("packer").startup(function(use)
   use {"tpope/vim-surround"}
   use {"tpope/vim-unimpaired"}
 
+  use {"junegunn/vim-easy-align"}
   use {"mhartington/formatter.nvim"}
 
   use {"christoomey/vim-tmux-navigator"}
