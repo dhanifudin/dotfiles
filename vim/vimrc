@@ -48,7 +48,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
-Plug 'roman/golden-ratio'
 Plug 'svermeulen/vim-easyclip'
 Plug 'wakatime/vim-wakatime'
 call plug#end()
