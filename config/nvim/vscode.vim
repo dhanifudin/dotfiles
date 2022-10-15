@@ -31,14 +31,9 @@ omap gc  <Plug>VSCodeCommentary
 nmap gcc <Plug>VSCodeCommentaryLine
 
 " Easymotion plugin
-let g:EasyMotion_keys = 'qwerasdfzxcv'
 let g:EasyMotion_do_mapping = 0
-let g:EasyMotion_do_shade = 1
 let g:EasyMotion_smartcase = 1
 
 nmap s <Plug>(easymotion-s)
 omap s <Plug>(easymotion-s)
 xmap s <Plug>(easymotion-s)
-
-highlight link EasyMotionTarget Search
-highlight link EasyMotionShade Comment
