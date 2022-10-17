@@ -49,8 +49,8 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+		-- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+		-- ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
 		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
@@ -98,17 +98,6 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 		on_attach = on_attach,
 	})
-end
-
-local system_name
-if vim.fn.has("mac") == 1 then
-	system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-	system_name = "Linux"
-elseif vim.fn.has("win32") == 1 then
-	system_name = "Windows"
-else
-	print("Unsupported system for sumneko")
 end
 
 require("lspconfig").sumneko_lua.setup({
