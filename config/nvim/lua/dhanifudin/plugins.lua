@@ -25,6 +25,7 @@ require("packer").startup(function(use)
   use {"editorconfig/editorconfig-vim"}
   use {"voldikss/vim-floaterm"}
   use {"mbbill/undotree"}
+  use {"towolf/vim-helm"}
 
   -- auto-completion engine
   use {"neovim/nvim-lspconfig"}
