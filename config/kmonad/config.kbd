@@ -12,7 +12,10 @@
 )
 
 (defsrc
-  a s d f g h j k l ;
+  q    w    e    r   t   y    u    i    o p
+  a    s    d    f   g   h    j    k    l ;
+  z    x    c    v   b   n    m    ,    . /
+  tab lalt lmet spc ret rmet ralt bspc
 )
 
 (defalias
@@ -25,8 +28,12 @@
   alt_k (tap-hold-next-release 200 k ralt)
   sft_l (tap-hold-next-release 200 l rsft)
   ctl_; (tap-hold-next-release 200 ; rctl)
+
+  sft_tab  (tap-hold-next-release 200 lsft tab)
+  sft_bspc (tap-hold-next-release 200 rsft bspc)
 )
 
 (deflayer homerowmods
   @ctl_a @sft_s @alt_d @met_f g h @met_j @alt_k @sft_l @ctl_;
+  @sft_tab @sft_bspc
 )
