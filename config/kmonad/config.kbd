@@ -12,10 +12,7 @@
 )
 
 (defsrc
-  q    w    e    r   t   y    u    i    o p
-  a    s    d    f   g   h    j    k    l ;
-  z    x    c    v   b   n    m    ,    . /
-  tab lalt lmet spc ret rmet ralt bspc
+  tab a s d f g h j k l ; bspc
 )
 
 (defalias
@@ -34,8 +31,5 @@
 )
 
 (deflayer homerowmods
-  q        w      e      r      t   y    u      i      o      p
-  @ctl_a   @sft_s @alt_d @met_f g   h    @met_j @alt_k @sft_l @ctl_;
-  z        x      c      v      b   n    m      ,      .      /
-  @sft_tab lalt   lmet   spc    ret rmet ralt   @sft_bspc
+  @sft_tab @ctl_a @sft_s @alt_d @met_f g h @met_j @alt_k @sft_l @ctl_; @sft_bspc
 )
