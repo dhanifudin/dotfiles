@@ -41,6 +41,7 @@ require("packer").startup(function(use)
   use {"hrsh7th/cmp-vsnip"}
   use {"hrsh7th/vim-vsnip"}
   use {"akinsho/flutter-tools.nvim"}
+  use {"rafamadriz/friendly-snippets"}
 
   use {"h4kst3r/php-awesome-snippets"}
   use {"jmsv/vscode-javascript-standard"}
