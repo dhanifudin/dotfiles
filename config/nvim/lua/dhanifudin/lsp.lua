@@ -42,6 +42,10 @@ require("nvim-ts-autotag").setup()
 
 local cmp = require("cmp")
 
+local function replace_keys(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -49,8 +53,25 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		-- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-		-- ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if vim.call("vsnip#available", 1) ~= 0 then
+				vim.fn.feedkeys(replace_keys("<Plug>(vsnip-jump-next)"), "")
+			elseif cmp.visible() then
+				cmp.select_next_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if vim.call("vsnip#available", -1) ~= 0 then
+				vim.fn.feedkeys(replace_keys("<Plug>(vsnip-jump-prev)"), "")
+			elseif cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 		["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
@@ -68,6 +89,7 @@ cmp.setup({
 		{ name = "vsnip" }, -- For vsnip users.
 		{ name = "buffer" },
 		{ name = "path" },
+		{ name = "copilot" },
 	}),
 })
 
@@ -79,13 +101,13 @@ cmp.setup.cmdline("/", {
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
--- cmp.setup.cmdline(':', {
---   sources = cmp.config.sources({
---     { name = 'path' }
---   }, {
---     { name = 'cmdline' }
---   })
--- })
+cmp.setup.cmdline(":", {
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
 
 -- Setup lspconfig.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
