@@ -76,7 +76,7 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
 		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
-		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+		["<C-c>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 		["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
 		["<C-e>"] = cmp.mapping({
 			i = cmp.mapping.abort(),
@@ -89,23 +89,29 @@ cmp.setup({
 		{ name = "vsnip" }, -- For vsnip users.
 		{ name = "buffer" },
 		{ name = "path" },
-		{ name = "copilot" },
 	}),
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+-- `/` cmdline setup.
 cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
 		{ name = "buffer" },
 	},
 })
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+-- `:` cmdline setup.
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 	}, {
-		{ name = "cmdline" },
+		{
+			name = "cmdline",
+			option = {
+				ignore_cmds = { "Man", "!" },
+			},
+		},
 	}),
 })
 
