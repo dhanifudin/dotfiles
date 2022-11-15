@@ -57,6 +57,16 @@ require("formatter").setup({
 			end,
 		},
 
+		python = {
+			function()
+				return {
+					exe = "black",
+					args = { "-q", "-" },
+					stdin = true,
+				}
+			end,
+		},
+
 		-- Use the special "*" filetype for defining formatter configurations on
 		-- any filetype
 		["*"] = {

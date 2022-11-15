@@ -44,8 +44,6 @@ require("packer").startup(function(use)
 	use({ "akinsho/flutter-tools.nvim" })
 	use({ "rafamadriz/friendly-snippets" })
 
-	use({ "h4kst3r/php-awesome-snippets" })
-	use({ "jmsv/vscode-javascript-standard" })
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
@@ -79,8 +77,6 @@ require("packer").startup(function(use)
 
 	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
-	-- use {"vim-airline/vim-airline"}
-	-- use {"vim-airline/vim-airline-themes"}
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
