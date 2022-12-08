@@ -13,3 +13,5 @@ require("formatter").setup({
 		},
 	},
 })
+
+vim.cmd [[autocmd BufWritePost * FormatWrite]]

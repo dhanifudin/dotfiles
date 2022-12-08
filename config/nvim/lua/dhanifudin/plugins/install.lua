@@ -1,19 +1,17 @@
-local fn = vim.fn
-
-local packer_install_dir = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-local plug_url_format = "https://github.com/%s"
-
-local packer_repo = string.format(plug_url_format, "wbthomason/packer.nvim")
-local install_cmd = string.format("10split | term git clone --depth=1 %s %s", packer_repo, packer_install_dir)
-
-if fn.empty(fn.glob(packer_install_dir)) > 0 then
-	vim.api.nvim_echo({ { "Installing packer.nvim", "Type" } }, true, {})
-	vim.cmd(install_cmd)
+local ensure_packer = function()
+	local fn = vim.fn
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
 end
 
-vim.cmd("packadd packer.nvim")
+local packer_bootstrap = ensure_packer()
 
-require("packer").startup(function(use)
+return require("packer").startup(function(use)
 	use({ "wbthomason/packer.nvim", opt = true })
 	use({ "lewis6991/impatient.nvim", config = [[require('impatient')]] })
 
@@ -31,7 +29,7 @@ require("packer").startup(function(use)
 	use({ "neovim/nvim-lspconfig" })
 	use({ "hrsh7th/nvim-cmp" })
 	use({ "tami5/lspsaga.nvim" })
-	-- use({ "github/copilot.vim" })
+	use({ "github/copilot.vim" })
 
 	-- nvim-cmp completion sources
 	use({ "hrsh7th/cmp-nvim-lsp" })
@@ -39,7 +37,6 @@ require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-path" })
 	use({ "hrsh7th/cmp-buffer" })
 	use({ "hrsh7th/cmp-vsnip" })
-	-- use({ "hrsh7th/cmp-copilot" })
 	use({ "hrsh7th/vim-vsnip" })
 	use({ "akinsho/flutter-tools.nvim" })
 	use({ "rafamadriz/friendly-snippets" })
@@ -51,7 +48,12 @@ require("packer").startup(function(use)
 	use({ "wakatime/vim-wakatime" })
 	use({ "tpope/vim-vinegar" })
 
-	use({ "easymotion/vim-easymotion" })
+	use({
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	})
 
 	use({
 		"nvim-telescope/telescope.nvim",
@@ -104,4 +106,8 @@ require("packer").startup(function(use)
 		"Julian/vim-textobj-variable-segment",
 		requires = { "kana/vim-textobj-user" },
 	})
+
+	if packer_bootstrap then
+		require("packer").sync()
+	end
 end)
