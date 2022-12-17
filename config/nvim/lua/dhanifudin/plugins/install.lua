@@ -11,11 +11,21 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require("packer").startup(function(use)
-	use({ "wbthomason/packer.nvim", opt = true })
-	use({ "lewis6991/impatient.nvim", config = [[require('impatient')]] })
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost install.lua source <afile> | PackerInstall
+  augroup end
+]])
 
-	use({ "onsails/lspkind-nvim" })
+local status, packer = pcall(require, "packer")
+if not status then
+	return
+end
+
+return packer.startup(function(use)
+	use({ "wbthomason/packer.nvim", opt = true })
+	use({ "lewis6991/impatient.nvim" })
 
 	use({ "gruvbox-community/gruvbox" })
 	use({ "lukas-reineke/indent-blankline.nvim" })
@@ -28,7 +38,8 @@ return require("packer").startup(function(use)
 	-- auto-completion engine
 	use({ "neovim/nvim-lspconfig" })
 	use({ "hrsh7th/nvim-cmp" })
-	use({ "tami5/lspsaga.nvim" })
+	use({ "onsails/lspkind-nvim" })
+	use({ "kkharji/lspsaga.nvim" })
 	use({ "github/copilot.vim" })
 
 	-- nvim-cmp completion sources
@@ -51,7 +62,7 @@ return require("packer").startup(function(use)
 	use({
 		"ggandor/leap.nvim",
 		config = function()
-			require("leap").add_default_mappings()
+			require("lua.dhanifudin.plugins.leap")
 		end,
 	})
 
@@ -87,7 +98,7 @@ return require("packer").startup(function(use)
 	use({ "windwp/nvim-autopairs" })
 	use({ "windwp/nvim-ts-autotag" })
 
-	use({ "tpope/vim-commentary" })
+	use({ "numToStr/Comment.nvim" })
 	use({ "tpope/vim-dadbod" })
 	use({ "tpope/vim-dispatch" })
 	use({ "tpope/vim-dotenv" })
@@ -107,7 +118,9 @@ return require("packer").startup(function(use)
 		requires = { "kana/vim-textobj-user" },
 	})
 
+	use({ "monaqa/dial.nvim" })
+
 	if packer_bootstrap then
-		require("packer").sync()
+		require("packer").install()
 	end
 end)

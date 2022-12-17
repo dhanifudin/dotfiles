@@ -40,6 +40,7 @@ require("nvim-autopairs").setup({
 
 require("nvim-ts-autotag").setup()
 
+local lspkind = require("lspkind")
 local cmp = require("cmp")
 
 local function replace_keys(str)
@@ -47,6 +48,16 @@ local function replace_keys(str)
 end
 
 cmp.setup({
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol",
+			maxwidth = 50,
+			ellipsis_char = "...",
+			before = function(entry, vim_item)
+				return vim_item
+			end,
+		}),
+	},
 	snippet = {
 		expand = function(args)
 			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
@@ -132,6 +143,7 @@ local servers = {
 	"yamlls",
 	"pyright",
 }
+
 for _, lsp in ipairs(servers) do
 	nvim_lsp[lsp].setup({
 		capabilities = capabilities,

@@ -16,4 +16,9 @@ require("formatter").setup({
 	},
 })
 
-vim.cmd([[autocmd BufWritePost * FormatWrite]])
+vim.cmd([[
+  augroup formatter_autocmd
+    autocmd!
+    autocmd BufWritePost * FormatWrite
+  augroup end
+]])
