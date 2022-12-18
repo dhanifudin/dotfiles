@@ -1,5 +1,4 @@
 require("telescope").load_extension("file_browser")
-require("telescope").load_extension("flutter")
 
 vim.api.nvim_set_keymap("n", "gof", ":Telescope find_files<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "goF", ":Telescope file_browser<cr>", { noremap = true, silent = true })

@@ -1,6 +1,7 @@
 require("dhanifudin.plugins.install")
 require("dhanifudin.plugins.lsp")
 require("dhanifudin.plugins.lspsaga")
+require("dhanifudin.plugins.hop")
 require("dhanifudin.plugins.treesitter")
 require("dhanifudin.plugins.lualine")
 require("dhanifudin.plugins.blankline")

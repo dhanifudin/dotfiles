@@ -24,8 +24,9 @@ if not status then
 end
 
 return packer.startup(function(use)
-	use({ "wbthomason/packer.nvim", opt = true })
+	use({ "wbthomason/packer.nvim" })
 	use({ "lewis6991/impatient.nvim" })
+	use({ "nvim-lua/plenary.nvim" })
 
 	use({ "gruvbox-community/gruvbox" })
 	use({ "lukas-reineke/indent-blankline.nvim" })
@@ -40,7 +41,6 @@ return packer.startup(function(use)
 	use({ "hrsh7th/nvim-cmp" })
 	use({ "onsails/lspkind-nvim" })
 	use({ "kkharji/lspsaga.nvim" })
-	use({ "github/copilot.vim" })
 
 	-- nvim-cmp completion sources
 	use({ "hrsh7th/cmp-nvim-lsp" })
@@ -49,27 +49,18 @@ return packer.startup(function(use)
 	use({ "hrsh7th/cmp-buffer" })
 	use({ "hrsh7th/cmp-vsnip" })
 	use({ "hrsh7th/vim-vsnip" })
-	use({ "akinsho/flutter-tools.nvim" })
 	use({ "rafamadriz/friendly-snippets" })
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	})
+
 	use({ "wakatime/vim-wakatime" })
-	use({ "tpope/vim-vinegar" })
+	use({ "phaazon/hop.nvim" })
 
-	use({
-		"ggandor/leap.nvim",
-		config = function()
-			require("lua.dhanifudin.plugins.leap")
-		end,
-	})
-
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+	use({ "nvim-telescope/telescope.nvim" })
+	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	use({
 		"simrat39/symbols-outline.nvim",
@@ -80,15 +71,10 @@ return packer.startup(function(use)
 
 	use({
 		"lewis6991/gitsigns.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
 		config = function()
 			require("gitsigns").setup()
 		end,
 	})
-
-	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -98,7 +84,13 @@ return packer.startup(function(use)
 	use({ "windwp/nvim-autopairs" })
 	use({ "windwp/nvim-ts-autotag" })
 
-	use({ "numToStr/Comment.nvim" })
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
+
 	use({ "tpope/vim-dadbod" })
 	use({ "tpope/vim-dispatch" })
 	use({ "tpope/vim-dotenv" })
@@ -107,6 +99,7 @@ return packer.startup(function(use)
 	use({ "tpope/vim-repeat" })
 	use({ "tpope/vim-surround" })
 	use({ "tpope/vim-unimpaired" })
+	use({ "tpope/vim-vinegar" })
 
 	use({ "junegunn/vim-easy-align" })
 	use({ "mhartington/formatter.nvim" })
@@ -119,6 +112,12 @@ return packer.startup(function(use)
 	})
 
 	use({ "monaqa/dial.nvim" })
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	})
 
 	if packer_bootstrap then
 		require("packer").install()
