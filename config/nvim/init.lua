@@ -4,4 +4,8 @@ if not status then
 	return
 end
 
-require("dhanifudin")
+if vim.g.vscode ~= nil then
+	require("dhanifudin.config.vscode")
+else
+	require("dhanifudin")
+end
