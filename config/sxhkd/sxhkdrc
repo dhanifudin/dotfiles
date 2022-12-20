@@ -1,0 +1,8 @@
+super + c
+  clipmenu
+
+super + s
+  scrot --delay 1 ~/Pictures/Screenshots/'screen_%Y-%m-%d %H-%M-%S.png'
+
+super + shift + @s
+  scrot --select ~/Pictures/Screenshots/'window_%Y-%m-%d %H-%M-%S.png'
