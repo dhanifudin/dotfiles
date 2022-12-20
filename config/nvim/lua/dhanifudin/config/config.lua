@@ -1,5 +1,5 @@
 local set = vim.opt
--- local cmd = vim.cmd
+local fn = vim.fn
 
 set.mouse = "a"
 
@@ -21,6 +21,10 @@ set.ignorecase = true
 set.smartcase = true
 set.incsearch = true
 
+if fn.has("persistent_undo") then
+	set.undofile = true
+end
+
 set.termguicolors = true
 set.background = "dark"
 set.signcolumn = "yes"
@@ -35,7 +39,3 @@ set.splitright = true
 set.splitbelow = true
 
 set.iskeyword:append("-")
--- cmd [[
---   set path+=**
---   colorscheme gruvbox
--- ]]
