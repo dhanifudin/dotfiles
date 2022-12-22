@@ -1,4 +1,4 @@
-require("dhanifudin.plugins.install")
+require("dhanifudin.plugins.lazy")
 require("dhanifudin.plugins.lsp")
 require("dhanifudin.plugins.lspsaga")
 require("dhanifudin.plugins.hop")

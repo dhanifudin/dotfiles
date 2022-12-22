@@ -1,3 +1,4 @@
 autoload/
 plugin/
 plugged/
+lazy-lock.json
