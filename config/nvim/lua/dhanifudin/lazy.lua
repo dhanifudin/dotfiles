@@ -35,7 +35,6 @@ if vim.g.vscode == nil then
 
 		{
 			"hrsh7th/nvim-cmp",
-			event = "InsertEnter",
 			dependencies = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-nvim-lua",

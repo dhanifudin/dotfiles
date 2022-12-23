@@ -32,6 +32,8 @@ set.cursorline = true
 
 set.backspace = "indent,eol,start"
 
+set.scrolloff = 8
+
 -- clipboard
 set.clipboard:append("unnamedplus")
 
