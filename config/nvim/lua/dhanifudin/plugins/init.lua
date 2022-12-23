@@ -1,4 +1,5 @@
 require("dhanifudin.plugins.lazy")
+require("dhanifudin.plugins.gruvbox")
 require("dhanifudin.plugins.lsp")
 require("dhanifudin.plugins.lspsaga")
 require("dhanifudin.plugins.hop")

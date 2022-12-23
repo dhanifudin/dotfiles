@@ -100,7 +100,7 @@ if vim.g.vscode == nil then
 
 		{ "junegunn/vim-easy-align", lazy = true },
 		{ "mhartington/formatter.nvim", lazy = true },
-		{ "christoomey/vim-tmux-navigator", lazy = true },
+		"christoomey/vim-tmux-navigator",
 
 		{
 			"Julian/vim-textobj-variable-segment",
