@@ -45,6 +45,8 @@ if vim.g.vscode == nil then
 				"rafamadriz/friendly-snippets",
 			},
 		},
+		"mfussenegger/nvim-dap",
+		"leoluz/nvim-dap-go",
 
 		"nvim-treesitter/nvim-treesitter",
 

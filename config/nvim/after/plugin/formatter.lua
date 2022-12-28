@@ -1,4 +1,10 @@
-require("formatter").setup({
+local status, formatter = pcall(require, "formatter")
+
+if not status then
+  return
+end
+
+formatter.setup({
 	logging = true,
 	log_level = vim.log.levels.WARN,
 	filetype = {

@@ -1,7 +1,7 @@
 github.com/cweill/gotests
 github.com/fatih/gomodifytags
 github.com/go-delve/delve/cmd/dlv
-github.com/google/yamlfmt
+github.com/google/yamlfmt/cmd/yamlfmt
 github.com/haya14busa/goplay/cmd/goplay
 github.com/josharian/impl
 golang.org/x/tools/gopls
