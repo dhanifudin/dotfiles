@@ -1,24 +1,28 @@
-local vim = vim
-local opt = vim.opt
+local status, treesitter = pcall(require, "nvim-treesitter.configs")
 
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+if status then
+	local vim = vim
+	local opt = vim.opt
 
-require("nvim-treesitter.configs").setup({
-	ensure_installed = "all",
-	highlight = {
-		enable = true,
-	},
-	textobjects = {
-		select = {
+	opt.foldmethod = "expr"
+	opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+	treesitter.setup({
+		ensure_installed = "all",
+		highlight = {
 			enable = true,
-			lookahead = true,
-			keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.outer",
-				["ac"] = "@function.outer",
-				["ic"] = "@function.outer",
+		},
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true,
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.outer",
+					["ac"] = "@function.outer",
+					["ic"] = "@function.outer",
+				},
 			},
 		},
-	},
-})
+	})
+end
