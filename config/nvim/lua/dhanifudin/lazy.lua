@@ -30,8 +30,7 @@ if vim.g.vscode == nil then
 		{ "towolf/vim-helm", ft = "yaml" },
 
 		"neovim/nvim-lspconfig",
-		{ "onsails/lspkind-nvim", lazy = true },
-		{ "kkharji/lspsaga.nvim", lazy = true },
+		"glepnir/lspsaga.nvim",
 
 		{
 			"hrsh7th/nvim-cmp",
@@ -51,7 +50,7 @@ if vim.g.vscode == nil then
 		"nvim-treesitter/nvim-treesitter",
 
 		"wakatime/vim-wakatime",
-		{ "phaazon/hop.nvim", lazy = true },
+		"phaazon/hop.nvim",
 
 		{
 			"nvim-telescope/telescope.nvim",
@@ -76,6 +75,33 @@ if vim.g.vscode == nil then
 			end,
 		},
 
+		{
+			"folke/zen-mode.nvim",
+			config = function()
+				require("zen-mode").setup({
+					{
+						window = {
+							backdrop = 0.8,
+							options = {
+								signcolumn = "no",
+								number = false,
+								relativenumber = false,
+								cursorline = true,
+								foldcolumn = "0",
+								list = false,
+							},
+						},
+						plugins = {
+							tmux = { enabled = true },
+							kitty = {
+								enabled = true,
+								font = "+2",
+							},
+						},
+					},
+				})
+			end,
+		},
 		"nvim-lualine/lualine.nvim",
 		"kyazdani42/nvim-web-devicons",
 
