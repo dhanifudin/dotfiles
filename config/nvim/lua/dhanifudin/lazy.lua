@@ -103,7 +103,8 @@ if vim.g.vscode == nil then
 			end,
 		},
 		"nvim-lualine/lualine.nvim",
-		"kyazdani42/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
+		"nvim-tree/nvim-tree.lua",
 
 		"windwp/nvim-autopairs",
 		"windwp/nvim-ts-autotag",

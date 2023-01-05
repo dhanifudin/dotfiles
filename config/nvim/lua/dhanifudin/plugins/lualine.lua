@@ -112,6 +112,6 @@ if status then
 			lualine_c = { "%f %y %m" },
 			lualine_x = {},
 		},
-		extensions = { "fugitive" },
+		extensions = { "fugitive", "nvim-tree", "quickfix", "symbols-outline" },
 	})
 end
