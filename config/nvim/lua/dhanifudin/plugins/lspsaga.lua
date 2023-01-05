@@ -1,8 +1,11 @@
 local status, saga = pcall(require, "lspsaga")
 
 if status then
+	local keymap = vim.keymap.set
+
 	saga.init_lsp_saga()
 
-	vim.api.nvim_set_keymap("n", "<leader>ca", ":Lspsaga code_action<CR>", { noremap = true, silent = true })
-	vim.api.nvim_set_keymap("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>", { noremap = true, silent = true })
+	keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+	keymap("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
+	keymap("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { noremap = true, silent = true })
 end
