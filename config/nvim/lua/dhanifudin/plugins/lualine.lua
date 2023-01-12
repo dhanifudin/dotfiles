@@ -2,13 +2,13 @@ local status, lualine = pcall(require, "lualine")
 
 if status then
 	local colors = {
-		red = "#ca1243",
-		grey = "#a0a1a7",
-		black = "#383a42",
-		white = "#f3f3f3",
-		light_green = "#83a598",
-		orange = "#fe8019",
-		green = "#8ec07c",
+		red = "#cc241d",
+		grey = "#928374",
+		black = "#282828",
+		white = "#ebdbb2",
+		light_green = "#fe8019",
+		orange = "#d65d0e",
+		green = "#98971a",
 	}
 
 	local empty = require("lualine.component"):extend()
@@ -112,6 +112,6 @@ if status then
 			lualine_c = { "%f %y %m" },
 			lualine_x = {},
 		},
-		extensions = { "fugitive", "nvim-tree", "quickfix", "symbols-outline" },
+		extensions = { "fugitive", "nvim-tree", "quickfix", "symbols-outline", "toggleterm" },
 	})
 end

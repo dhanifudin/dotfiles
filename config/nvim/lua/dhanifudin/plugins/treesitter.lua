@@ -6,6 +6,7 @@ if status then
 
 	opt.foldmethod = "expr"
 	opt.foldexpr = "nvim_treesitter#foldexpr()"
+	opt.foldenable = false
 
 	treesitter.setup({
 		ensure_installed = "all",

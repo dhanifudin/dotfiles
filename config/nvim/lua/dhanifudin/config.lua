@@ -39,5 +39,3 @@ set.clipboard:append("unnamedplus")
 
 set.splitright = true
 set.splitbelow = true
-
-set.iskeyword:append("-")

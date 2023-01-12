@@ -11,7 +11,7 @@ if status then
 			adaptive_size = true,
 		},
 		filters = {
-			dotfiles = true,
+			dotfiles = false,
 		},
 	})
 end
