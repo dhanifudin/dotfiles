@@ -1,5 +1,8 @@
-super + c
+super + v
   clipmenu
+
+super + slash
+  rofi -show window
 
 super + s
   scrot --delay 1 ~/Pictures/Screenshots/'screen_%Y-%m-%d %H-%M-%S.png'
