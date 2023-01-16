@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	lazy = true,
+	event = "BufRead",
 	dependencies = {
 		"nvim-telescope/telescope-file-browser.nvim",
 	},

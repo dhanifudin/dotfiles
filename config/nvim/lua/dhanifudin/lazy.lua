@@ -26,7 +26,7 @@ if status then
 			"voldikss/vim-floaterm",
 			"mbbill/undotree",
 			"neovim/nvim-lspconfig",
-
+			require("dhanifudin.plugins.lspsaga"),
 			{
 				"hrsh7th/nvim-cmp",
 				dependencies = {
@@ -37,9 +37,9 @@ if status then
 					"hrsh7th/cmp-vsnip",
 					"hrsh7th/vim-vsnip",
 					"rafamadriz/friendly-snippets",
-					"glepnir/lspsaga.nvim",
 				},
 			},
+
 			"mfussenegger/nvim-dap",
 			"leoluz/nvim-dap-go",
 
