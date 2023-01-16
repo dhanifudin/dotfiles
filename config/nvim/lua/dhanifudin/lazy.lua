@@ -23,7 +23,6 @@ if status then
 			"svermeulen/vim-cutlass",
 			require("dhanifudin.plugins.yoink"),
 			"editorconfig/editorconfig-vim",
-			"voldikss/vim-floaterm",
 			"mbbill/undotree",
 			"neovim/nvim-lspconfig",
 			require("dhanifudin.plugins.lspsaga"),
