@@ -14,6 +14,17 @@ return {
 			keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 			keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
+			-- Show line diagnostics you can pass argument ++unfocus to make
+			-- show_line_diagnostics float window unfocus
+			keymap("n", "<leader>sl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+
+			-- Show cursor diagnostic
+			-- also like show_line_diagnostics  support pass ++unfocus
+			keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+
+			-- Show buffer diagnostic
+			keymap("n", "<leader>sb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+
 			-- Diagnostic jump with filter like Only jump to error
 			keymap("n", "[E", function()
 				require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
