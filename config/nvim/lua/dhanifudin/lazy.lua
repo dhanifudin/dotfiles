@@ -61,7 +61,6 @@ if status then
 			"folke/zen-mode.nvim",
 			"nvim-lualine/lualine.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"nvim-tree/nvim-tree.lua",
 
 			"windwp/nvim-autopairs",
 			"windwp/nvim-ts-autotag",
