@@ -47,6 +47,7 @@ if status then
 			"wakatime/vim-wakatime",
 			require("dhanifudin.plugins.hop"),
 			require("dhanifudin.plugins.telescope"),
+			require("dhanifudin.plugins.todo-comments"),
 
 			{
 				"simrat39/symbols-outline.nvim",
