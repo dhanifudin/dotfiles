@@ -18,8 +18,8 @@ if status then
 	if vim.g.vscode == nil then
 		plugins = {
 			"nvim-lua/plenary.nvim",
-			"gruvbox-community/gruvbox",
-			"lukas-reineke/indent-blankline.nvim",
+			require("dhanifudin.plugins.gruvbox"),
+			require("dhanifudin.plugins.blankline"),
 			"svermeulen/vim-cutlass",
 			require("dhanifudin.plugins.yoink"),
 			"editorconfig/editorconfig-vim",
@@ -48,14 +48,7 @@ if status then
 			require("dhanifudin.plugins.hop"),
 			require("dhanifudin.plugins.telescope"),
 			require("dhanifudin.plugins.todo-comments"),
-
-			{
-				"simrat39/symbols-outline.nvim",
-				cmd = "SymbolsOutline",
-				config = function()
-					require("symbols-outline").setup()
-				end,
-			},
+			require("dhanifudin.plugins.symbols-outline"),
 
 			"lewis6991/gitsigns.nvim",
 			"folke/zen-mode.nvim",
@@ -86,7 +79,7 @@ if status then
 			{ "mhartington/formatter.nvim", lazy = true },
 			"christoomey/vim-tmux-navigator",
 
-			{ "monaqa/dial.nvim", keys = { "<C-a>", "<C-x>" } },
+			require("dhanifudin.plugins.dial"),
 			require("dhanifudin.plugins.textobject"),
 			require("dhanifudin.plugins.markdown"),
 			require("dhanifudin.plugins.filetypes"),
