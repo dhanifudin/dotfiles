@@ -42,7 +42,7 @@ if status then
 			"mfussenegger/nvim-dap",
 			"leoluz/nvim-dap-go",
 
-			"nvim-treesitter/nvim-treesitter",
+			require("dhanifudin.plugins.treesitter"),
 
 			"wakatime/vim-wakatime",
 			require("dhanifudin.plugins.hop"),
@@ -75,7 +75,7 @@ if status then
 			"tpope/vim-unimpaired",
 			"tpope/vim-vinegar",
 
-			{ "junegunn/vim-easy-align", lazy = true },
+			"junegunn/vim-easy-align",
 			{ "mhartington/formatter.nvim", lazy = true },
 			"christoomey/vim-tmux-navigator",
 

@@ -1,29 +1,35 @@
-local status, treesitter = pcall(require, "nvim-treesitter.configs")
+return {
+	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
+	config = function()
+		local status, treesitter = pcall(require, "nvim-treesitter.configs")
 
-if status then
-	local vim = vim
-	local opt = vim.opt
+		if status then
+			local vim = vim
+			local opt = vim.opt
 
-	opt.foldmethod = "expr"
-	opt.foldexpr = "nvim_treesitter#foldexpr()"
-	opt.foldenable = false
+			opt.foldmethod = "expr"
+			opt.foldexpr = "nvim_treesitter#foldexpr()"
+			opt.foldenable = false
 
-	treesitter.setup({
-		ensure_installed = "all",
-		highlight = {
-			enable = true,
-		},
-		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true,
-				keymaps = {
-					["af"] = "@function.outer",
-					["if"] = "@function.outer",
-					["ac"] = "@function.outer",
-					["ic"] = "@function.outer",
+			treesitter.setup({
+				ensure_installed = "all",
+				highlight = {
+					enable = true,
 				},
-			},
-		},
-	})
-end
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["af"] = "@function.outer",
+							["if"] = "@function.outer",
+							["ac"] = "@function.outer",
+							["ic"] = "@function.outer",
+						},
+					},
+				},
+			})
+		end
+	end,
+}
