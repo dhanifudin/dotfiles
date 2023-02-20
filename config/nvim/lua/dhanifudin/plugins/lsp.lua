@@ -123,16 +123,17 @@ if status then
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 	local servers = {
-		"dockerls",
 		"cssls",
+		"dockerls",
 		"gopls",
 		"grammarly",
 		"html",
 		"intelephense",
 		"jsonls",
+		"pyright",
 		"tsserver",
 		"yamlls",
-		"pyright",
+		"fortls",
 	}
 
 	for _, lsp in ipairs(servers) do
@@ -163,7 +164,7 @@ if status then
 		cmd = { "helm_ls", "serve" },
 	})
 
-	require("lspconfig").sumneko_lua.setup({
+	require("lspconfig").lua_ls.setup({
 		settings = {
 			Lua = {
 				runtime = {

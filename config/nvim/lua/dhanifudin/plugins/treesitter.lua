@@ -13,7 +13,26 @@ return {
 			opt.foldenable = false
 
 			treesitter.setup({
-				ensure_installed = "all",
+				ensure_installed = {
+					"bash",
+					"c",
+					"cpp",
+					"dockerfile",
+					"go",
+					"gomod",
+					"haskell",
+					"html",
+					"javascript",
+					"jsdoc",
+					"json",
+					"json5",
+					"jsonc",
+					"lua",
+					"php",
+					"python",
+					"yaml",
+				},
+				auto_install = true,
 				highlight = {
 					enable = true,
 				},
