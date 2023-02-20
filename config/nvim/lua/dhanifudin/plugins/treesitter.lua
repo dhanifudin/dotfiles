@@ -20,6 +20,7 @@ return {
 					"dockerfile",
 					"go",
 					"gomod",
+					"fortran",
 					"haskell",
 					"html",
 					"javascript",
