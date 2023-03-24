@@ -3,26 +3,74 @@ return {
   branch = "coq",
   build = ":COQdeps",
   dependencies = {
+    "neovim/nvim-lspconfig",
     "ms-jpq/coq.artifacts",
+    "windwp/nvim-autopairs",
+    "windwp/nvim-ts-autotag",
   },
+  init = function()
+    vim.g.coq_settings = {
+      keymap = {
+        recommended = false,
+        pre_select = true,
+        jump_to_mark = "<nop>",
+      },
+    }
+  end,
   config = function()
     local lspstatus, lspconfig = pcall(require, "lspconfig")
 
     if lspstatus then
-      vim.g.coq_settings = {
-        keymap = { pre_select = true },
-      }
       local coqstatus, coq = pcall(require, "coq")
+      local autopairs = require("nvim-autopairs").setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+        map_bs = false,
+      })
+      require("nvim-ts-autotag").setup()
       if coqstatus then
         -- Use an on_attach function to only map the following keys
         -- after the language server attaches to the current buffer
         local on_attach = function(_, bufnr)
-          -- Enable completion triggered by <c-x><c-o>
-          vim.api.nvim_buf_set_option(
-            bufnr,
-            "omnifunc",
-            "v:lua.vim.lsp.omnifunc"
-          )
+          -- these mappings are coq recommended mappings unrelated to nvim-autopairs
+          remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
+          remap("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]], { expr = true, noremap = true })
+          remap("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]], { expr = true, noremap = true })
+          remap("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, noremap = true })
+
+          -- skip it, if you use another global object
+          _G.MUtils = {}
+
+          MUtils.CR = function()
+            if vim.fn.pumvisible() ~= 0 then
+              if vim.fn.complete_info({ "selected" }).selected ~= -1 then
+                return autopairs.esc("<c-y>")
+              else
+                return autopairs.esc("<c-e>") .. autopairs.autopairs_cr()
+              end
+            else
+              return autopairs.autopairs_cr()
+            end
+          end
+          remap("i", "<cr>", "v:lua.MUtils.CR()", { expr = true, noremap = true })
+
+          MUtils.BS = function()
+            if
+              vim.fn.pumvisible() ~= 0
+              and vim.fn.complete_info({ "mode" }).mode == "eval"
+            then
+              return autopairs.esc("<c-e>") .. autopairs.autopairs_bs()
+            else
+              return autopairs.autopairs_bs()
+            end
+          end
+          remap("i", "<bs>", "v:lua.MUtils.BS()", { expr = true, noremap = true })
+
+          -- -- Enable completion triggered by <c-x><c-o>
+          -- vim.api.nvim_buf_set_option(
+          --   bufnr,
+          --   "omnifunc",
+          --   "v:lua.vim.lsp.omnifunc"
+          -- )
 
           -- Mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions

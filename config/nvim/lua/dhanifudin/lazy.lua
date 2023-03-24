@@ -24,21 +24,8 @@ if status then
       require("dhanifudin.plugins.yoink"),
       "editorconfig/editorconfig-vim",
       "mbbill/undotree",
-      "neovim/nvim-lspconfig",
       -- require("dhanifudin.plugins.lspsaga"),
-      require("dhanifudin.plugins.coq"),
-      -- {
-      -- 	"hrsh7th/nvim-cmp",
-      -- 	dependencies = {
-      -- 		"hrsh7th/cmp-nvim-lsp",
-      -- 		"hrsh7th/cmp-nvim-lua",
-      -- 		"hrsh7th/cmp-path",
-      -- 		"hrsh7th/cmp-buffer",
-      -- 		"hrsh7th/cmp-vsnip",
-      -- 		"hrsh7th/vim-vsnip",
-      -- 		"rafamadriz/friendly-snippets",
-      -- 	},
-      -- },
+      require("dhanifudin.plugins.completion"),
 
       "mfussenegger/nvim-dap",
       "leoluz/nvim-dap-go",
@@ -56,15 +43,7 @@ if status then
       "nvim-lualine/lualine.nvim",
       "nvim-tree/nvim-web-devicons",
 
-      require("dhanifudin.plugins.autopair"),
-
-      {
-        "numToStr/Comment.nvim",
-        config = function()
-          require("Comment").setup()
-        end,
-      },
-
+      require("dhanifudin.plugins.comment"),
       "tpope/vim-dadbod",
       "tpope/vim-dispatch",
       "tpope/vim-dotenv",

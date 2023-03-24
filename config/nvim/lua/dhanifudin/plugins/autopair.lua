@@ -1,7 +1,7 @@
 return {
-  "windpwp/nvim-autopairs",
+  "windwp/nvim-autopairs",
   dependencies = {
-    "windpwp/nvim-ts-autotag",
+    "windwp/nvim-ts-autotag",
   },
   config = function()
     require("nvim-autopairs").setup({
