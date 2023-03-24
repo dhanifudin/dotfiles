@@ -7,6 +7,21 @@ return {
 	config = function()
 		local status, telescope = pcall(require, "telescope")
 		if status then
+      telescope.setup({
+        pickers = {
+          find_files = {
+            theme = "ivy",
+          },
+          live_grep = {
+            theme = "ivy"
+          }
+        },
+        extensions = {
+          file_browser = {
+            theme = "ivy"
+          }
+        }
+      })
 			telescope.load_extension("file_browser")
 
 			vim.api.nvim_set_keymap("n", "gof", ":Telescope find_files<cr>", { noremap = true, silent = true })
