@@ -1,5 +1,0 @@
-set gui=nonavigation
-set hintchars=abcdefghijklmnopqrstuvwxyz
-
-noremap j 5j
-noremap k 5k
