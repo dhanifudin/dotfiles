@@ -24,8 +24,8 @@ if status then
       require("dhanifudin.plugins.yoink"),
       "editorconfig/editorconfig-vim",
       "mbbill/undotree",
-      -- require("dhanifudin.plugins.lspsaga"),
-      require("dhanifudin.plugins.completion"),
+      require("dhanifudin.plugins.lspsaga"),
+      require("dhanifudin.plugins.lsp"),
 
       "mfussenegger/nvim-dap",
       "leoluz/nvim-dap-go",

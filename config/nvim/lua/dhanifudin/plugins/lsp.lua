@@ -8,6 +8,8 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
+    "windwp/nvim-autopairs",
+    "windwp/nvim-ts-autotag",
     "rafamadriz/friendly-snippets",
   },
   config = function()
@@ -117,19 +119,19 @@ return {
       })
 
       -- `:` cmdline setup.
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          {
-            name = "cmdline",
-            option = {
-              ignore_cmds = { "Man", "!" },
-            },
-          },
-        }),
-      })
+      -- cmp.setup.cmdline(":", {
+      --   mapping = cmp.mapping.preset.cmdline(),
+      --   sources = cmp.config.sources({
+      --     { name = "path" },
+      --   }, {
+      --     {
+      --       name = "cmdline",
+      --       option = {
+      --         ignore_cmds = { "Man", "!" },
+      --       },
+      --     },
+      --   }),
+      -- })
 
       -- Setup lspconfig.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
