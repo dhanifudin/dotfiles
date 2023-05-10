@@ -1,5 +1,8 @@
 return {
   {
+    "mong8se/actually.nvim",
+  },
+  {
     "christoomey/vim-tmux-navigator",
   },
   {
