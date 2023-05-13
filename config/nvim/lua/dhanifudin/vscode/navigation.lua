@@ -23,10 +23,10 @@ return {
         end, { remap = true })
 
         vim.cmd([[
-        highlight HopNextKey guifg=red
-        highlight HopNextKey1 guifg=red
-        highlight HopNextKey2 guifg=red
-      ]])
+          highlight HopNextKey guifg=red
+          highlight HopNextKey1 guifg=red
+          highlight HopNextKey2 guifg=red
+        ]])
       end
     end,
   },
