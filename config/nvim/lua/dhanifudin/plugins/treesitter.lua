@@ -7,12 +7,9 @@ return {
       local installed, treesitter = pcall(require, "nvim-treesitter.configs")
 
       if installed then
-        local vim = vim
-        local opt = vim.opt
-
-        opt.foldmethod = "expr"
-        opt.foldexpr = "nvim_treesitter#foldexpr()"
-        opt.foldenable = false
+        vim.opt.foldmethod = "expr"
+        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        vim.opt.foldenable = false
 
         treesitter.setup({
           ensure_installed = {
@@ -66,6 +63,14 @@ return {
           },
         })
       end
+    end,
+  },
+  {
+    "Wansmer/treesj",
+    keys = { "<space>m", "<space>j", "<space>s" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("treesj").setup({})
     end,
   },
 }
