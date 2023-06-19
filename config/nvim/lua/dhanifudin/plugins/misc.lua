@@ -1,5 +1,8 @@
 return {
   {
+    "wakatime/vim-wakatime",
+  },
+  {
     "mong8se/actually.nvim",
   },
   {
