@@ -145,6 +145,7 @@ return {
         "html",
         "intelephense",
         "jsonls",
+        "lemminx",
         "pyright",
         "tsserver",
         "yamlls",
