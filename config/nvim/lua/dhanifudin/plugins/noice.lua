@@ -4,6 +4,9 @@ return {
     local installed, noice = pcall(require, "noice")
     if installed then
       noice.setup({
+        messages = {
+          enabled = false,
+        },
         routes = {
           {
             filter = {
