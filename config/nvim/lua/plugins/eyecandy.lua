@@ -1,8 +1,21 @@
 return {
+  { "ellisonleao/gruvbox.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "gruvbox",
     },
+  },
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    opts = function()
+      local dashboard = require("alpha.themes.dashboard")
+      local logo = [[
+        dhanifudin.vim
+        Powered by LazyVim
+      ]]
+      dashboard.section.header.val = vim.split(logo, "\n")
+    end,
   },
 }
