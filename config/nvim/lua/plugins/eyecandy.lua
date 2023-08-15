@@ -18,4 +18,11 @@ return {
       dashboard.section.header.val = vim.split(logo, "\n")
     end,
   },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      timeout = 3000,
+      top_down = false,
+    },
+  },
 }
