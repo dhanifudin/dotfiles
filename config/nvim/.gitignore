@@ -2,3 +2,4 @@ autoload/
 plugin/
 plugged/
 lazy-lock.json
+lazyvim.json
