@@ -10,9 +10,11 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
+        php = { "pint" },
         sh = { "shfmt" },
         typescriptreact = { "prettierd" },
-        php = { "pint" },
+        javascript = { "prettierd" },
+        typescript = { "prettierd" },
       },
       -- The options you set here will be merged with the builtin formatters.
       -- You can also define any custom formatters here.
