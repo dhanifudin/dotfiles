@@ -1,5 +1,8 @@
 return {
-  "tpope/vim-unimpaired",
+  {
+    "tummetott/unimpaired.nvim",
+    event = 'VeryLazy',
+  }
   "tpope/vim-dispatch",
   {
     "ellisonleao/glow.nvim",
