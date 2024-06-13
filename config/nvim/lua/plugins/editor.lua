@@ -1,7 +1,10 @@
 return {
   {
     "tummetott/unimpaired.nvim",
-    event = 'VeryLazy',
+    event = "VeryLazy",
+    opts = function()
+      require("unimpaired").setup()
+    end,
   },
   "tpope/vim-dispatch",
   {
@@ -10,4 +13,18 @@ return {
       require("glow").setup()
     end,
   },
+  {
+    "echasnovski/mini.comment",
+    event = "BufRead",
+    opts = function()
+      require("mini.comment").setup({
+        mappings = {
+          comment = "gc",
+          comment_line = "gcc",
+          comment_visual = "gc",
+          textobject = "gc",
+        },
+      })
+    end,
+  }
 }

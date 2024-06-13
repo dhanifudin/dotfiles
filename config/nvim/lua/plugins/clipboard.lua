@@ -10,4 +10,14 @@ return {
       end
     end,
   },
+  {
+    "gbprod/yanky.nvim",
+    opts = {
+      highlight = { timer = 250 },
+      ring = { storage = "shada" },
+      preserve_cursor_position = {
+        enabled = true
+      }
+    }
+  }
 }
