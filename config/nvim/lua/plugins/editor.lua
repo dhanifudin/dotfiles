@@ -26,5 +26,16 @@ return {
         },
       })
     end,
-  }
+  },
+  {
+    "echasnovski/mini.align",
+    event = "BufRead",
+    opts = function()
+      require("mini.align").setup({
+        mappings = {
+          start = "ga",
+        },
+      })
+    end,
+  },
 }
