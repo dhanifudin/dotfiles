@@ -4,7 +4,6 @@
 local keymap = vim.keymap.set
 
 keymap({ "n", "x" }, ";", ":", { noremap = true, silent = true })
-keymap("n", "!", ":!", { noremap = true, silent = true })
 
 keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 keymap("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move up" })

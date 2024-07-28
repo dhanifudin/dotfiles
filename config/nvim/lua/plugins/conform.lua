@@ -9,12 +9,14 @@ return {
         quiet = false, -- not recommended to change
       },
       formatters_by_ft = {
+        blade = { "blade-formatter" },
+        javascript = { "prettierd" },
         lua = { "stylua" },
         php = { "pint" },
         sh = { "shfmt" },
-        typescriptreact = { "prettierd" },
-        javascript = { "prettierd" },
         typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        vue = { "prettierd" },
       },
       -- The options you set here will be merged with the builtin formatters.
       -- You can also define any custom formatters here.

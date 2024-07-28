@@ -6,7 +6,12 @@ return {
       require("unimpaired").setup()
     end,
   },
-  "tpope/vim-dispatch",
+  {
+    "tpope/vim-dispatch",
+    config = function()
+      vim.keymap.set("n", "!", ":Dispatch ", { noremap = true, silent = true })
+    end,
+  },
   {
     "ellisonleao/glow.nvim",
     opts = function()
