@@ -1,5 +1,11 @@
 return {
   {
+    "Julian/vim-textobj-variable-segment",
+    dependencies = {
+      { "kana/vim-textobj-user" },
+    },
+  },
+  {
     "tummetott/unimpaired.nvim",
     event = "VeryLazy",
     opts = function()
@@ -16,20 +22,6 @@ return {
     "ellisonleao/glow.nvim",
     opts = function()
       require("glow").setup()
-    end,
-  },
-  {
-    "echasnovski/mini.comment",
-    event = "BufRead",
-    opts = function()
-      require("mini.comment").setup({
-        mappings = {
-          comment = "gc",
-          comment_line = "gcc",
-          comment_visual = "gc",
-          textobject = "gc",
-        },
-      })
     end,
   },
   {
