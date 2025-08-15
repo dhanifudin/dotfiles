@@ -1,15 +1,15 @@
 { config, pkgs, ...}:
 
+let
+  isWSL = builtins.match "Microsoft" (builtins.readFile /proc/sys/kernel/osrelease) != null;
+in
 {
   nixpkgs.config.allowUnfree = true;
 
   home = {
     username = "dhs";
     homeDirectory = "/home/dhs";
-    stateVersion = "24.11";
-    shellAliases = {
-        google-chrome = "google-chrome-stable";
-    };
+    stateVersion = "25.11";
   };
 
   home.packages = with pkgs; [
@@ -21,9 +21,11 @@
     flutter
     fzf
     git
+    gh
     google-chrome
     home-manager
-    htop
+    htop-vim
+    jdk
     lazygit
     lua51Packages.luarocks-nix
     mdbook
@@ -32,6 +34,7 @@
     pandoc
     ripgrep
     rustup
+    superfile
     sdkmanager
     silver-searcher
     tmux
@@ -40,7 +43,42 @@
     virtualgl
     zimfw
     zip
-  ];
+  ] ++ (if !isWSL then with pkgs; [ 
+    anydesk
+    arandr
+    beeper
+    blueman
+    clipmenu
+    dunst
+    keymapper
+    redshift
+    rofi 
+    sioyek
+    termius
+    vscode
+    # wezterm
+    # wpsoffice
+    zoom-us
+  ] else []);
+
+  home.file.".zimrc".text = ''
+    zmodule environment
+    zmodule git
+    zmodule input
+    zmodule termtitle
+    zmodule utility
+    zmodule duration-info
+    zmodule git-info
+    zmodule asciiship
+    zmodule fasd
+    zmodule fzf
+    zmodule zsh-users/zsh-completions --fpath src
+    zmodule completion
+
+    zmodule zsh-users/zsh-syntax-highlighting
+    zmodule zsh-users/zsh-history-substring-search
+    zmodule zsh-users/zsh-autosuggestions
+  '';
 
   programs.zsh = {
     enable = true;
@@ -49,12 +87,16 @@
 
       ZIM_HOME=$HOME/.zim
       if [ -e $HOME/.nix-profile/zimfw.zsh ]; then . $HOME/.nix-profile/zimfw.zsh init; fi
-
       export PATH="$HOME/.config/composer/vendor/bin:$HOME/bin:$HOME/.asdf/shims:$PATH"
-      . $HOME/.asdf/plugins/java/set-java-home.zsh
+
       eval "$(starship init zsh)"
-      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi
-      export ADB_SERVER_SOCKET=tcp:$(ip route show | grep -i default | awk '{ print $3}'):5037
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+        . $HOME/.nix-profile/etc/profile.d/nix.sh; 
+      fi
+      if grep -iqE "(microsoft|wsl)" /proc/version; then
+        export ADB_SERVER_SOCKET=tcp:$(ip route show | grep -i default | awk '{ print $3}'):5037
+      fi
+      export CHROME_EXECUTABLE=google-chrome-stable
     '';
   };
 }
