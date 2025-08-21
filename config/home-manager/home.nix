@@ -19,7 +19,7 @@ let
             (builtins.match ".*microsoft.*" cleanContent != null) ||
             (builtins.match ".*WSL.*" cleanContent != null)
         else false;
-      
+
       # Fallback method: check /proc/version
       checkProcVersion = 
         if builtins.pathExists /proc/version
@@ -31,7 +31,7 @@ let
             (builtins.match ".*[Mm]icrosoft.*" cleanContent != null) ||
             (builtins.match ".*[Ww][Ss][Ll].*" cleanContent != null)
         else false;
-      
+
       # Additional fallback: check for WSL environment variable
       checkWSLEnv = builtins.getEnv "WSL_DISTRO_NAME" != "";
     in
@@ -55,8 +55,9 @@ in
         android-tools
         ansible
         asdf-vm
-        git
         gh
+        git
+        go
         jdk
         lazygit
         lua51Packages.luarocks-nix
@@ -67,6 +68,7 @@ in
 
       # Command line utilities
       cliTools = [
+        direnv
         fasd
         fd
         fzf
@@ -99,8 +101,8 @@ in
         blueman
         clipmenu
         dunst
+        gimp
         google-chrome
-        keymapper
         redshift
         rofi
         sioyek
@@ -129,7 +131,7 @@ in
     zmodule asciiship
     zmodule fasd
     zmodule fzf
-    
+
     # Completions
     zmodule zsh-users/zsh-completions --fpath src
     zmodule completion
@@ -165,7 +167,7 @@ in
 
       # Initialize starship prompt
       eval "$(starship init zsh)"
-      
+
       # Source nix profile if available
       if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
         . $HOME/.nix-profile/etc/profile.d/nix.sh
