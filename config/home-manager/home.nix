@@ -76,6 +76,7 @@ in
         pandoc
         ripgrep
         silver-searcher
+        starship
         superfile
         tmux
         tree
@@ -88,7 +89,6 @@ in
         flutter
         home-manager
         virtualgl
-        zimfw
       ];
 
       # GUI applications (only for non-WSL environments)
@@ -147,11 +147,18 @@ in
       # Use emacs keybindings
       bindkey -e
 
-      # Initialize Zim framework
+      # ------------------
+      # Initialize modules
+      # ------------------
+
       ZIM_HOME=$HOME/.zim
-      if [ -e $HOME/.nix-profile/zimfw.zsh ]; then 
-        . $HOME/.nix-profile/zimfw.zsh init
+      # Download zimfw plugin manager if missing.
+      if [[ ! -e $ZIM_HOME/zimfw.zsh ]]; then
+        curl -fsSL --create-dirs -o $ZIM_HOME/zimfw.zsh \
+            https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
       fi
+      # Initialize modules.
+      source $ZIM_HOME/init.zsh
 
       # Configure PATH
       export PATH="$HOME/.config/composer/vendor/bin:$HOME/bin:$HOME/.asdf/shims:$PATH"
@@ -164,14 +171,14 @@ in
         . $HOME/.nix-profile/etc/profile.d/nix.sh
       fi
 
+      # Set Chrome executable path
+      export CHROME_EXECUTABLE=google-chrome-stable
+
       # WSL-specific configuration
       ${if isWSL then ''
       # Configure ADB for WSL - connect to host Windows ADB server
       export ADB_SERVER_SOCKET=tcp:$(ip route show | grep -i default | awk '{ print $3}'):5037
       '' else ""}
-      
-      # Set Chrome executable path
-      export CHROME_EXECUTABLE=google-chrome-stable
     '';
   };
 }
