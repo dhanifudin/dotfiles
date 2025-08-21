@@ -5,22 +5,37 @@ let
   isWSL = 
     let
       # Primary method: check /proc/sys/kernel/osrelease for Microsoft WSL signatures
-      # Expected formats: "6.6.87.2-microsoft-standard-WSL2", "5.4.0-Microsoft", etc.
       checkOsRelease = 
         if builtins.pathExists /proc/sys/kernel/osrelease
         then 
-          let content = builtins.readFile /proc/sys/kernel/osrelease;
-          in (builtins.match ".*[Mm]icrosoft.*" content != null) ||
-             (builtins.match ".*[Ww][Ss][Ll][0-9]*.*" content != null)
+          let 
+            content = builtins.readFile /proc/sys/kernel/osrelease;
+            # Remove any trailing whitespace/newlines that might interfere
+            cleanContent = builtins.replaceStrings ["\n" "\r"] ["" ""] content;
+          in 
+            # Check for various WSL signatures (case-insensitive approach)
+            (builtins.match ".*[Mm]icrosoft.*" cleanContent != null) ||
+            (builtins.match ".*[Ww][Ss][Ll].*" cleanContent != null) ||
+            (builtins.match ".*microsoft.*" cleanContent != null) ||
+            (builtins.match ".*WSL.*" cleanContent != null)
         else false;
       
-      # Fallback method: check /proc/version for WSL indicators
+      # Fallback method: check /proc/version
       checkProcVersion = 
         if builtins.pathExists /proc/version
-        then builtins.match ".*(microsoft|wsl|WSL|Microsoft).*" (builtins.readFile /proc/version) != null
+        then
+          let 
+            content = builtins.readFile /proc/version;
+            cleanContent = builtins.replaceStrings ["\n" "\r"] ["" ""] content;
+          in
+            (builtins.match ".*[Mm]icrosoft.*" cleanContent != null) ||
+            (builtins.match ".*[Ww][Ss][Ll].*" cleanContent != null)
         else false;
+      
+      # Additional fallback: check for WSL environment variable
+      checkWSLEnv = builtins.getEnv "WSL_DISTRO_NAME" != "";
     in
-    checkOsRelease || checkProcVersion;
+    checkOsRelease || checkProcVersion || checkWSLEnv;
 in
 {
   # Core system configuration
