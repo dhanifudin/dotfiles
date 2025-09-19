@@ -5,7 +5,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = "php" },
+    opts = { ensure_installed = { "php" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -18,7 +18,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "pint",
