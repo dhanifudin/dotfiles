@@ -44,7 +44,7 @@ in
   home = {
     username = "dhs";
     homeDirectory = "/home/dhs";
-    stateVersion = "25.11";
+    stateVersion = "25.05";
   };
 
   # Package configuration: common packages for all environments
@@ -58,6 +58,7 @@ in
         gh
         git
         go
+        google-chrome
         jdk
         lazygit
         lua51Packages.luarocks-nix
@@ -102,7 +103,6 @@ in
         clipmenu
         dunst
         gimp
-        google-chrome
         redshift
         rofi
         sioyek
@@ -130,7 +130,6 @@ in
     zmodule git-info
     zmodule asciiship
     zmodule fasd
-    zmodule fzf
 
     # Completions
     zmodule zsh-users/zsh-completions --fpath src
@@ -175,6 +174,7 @@ in
 
       # Set Chrome executable path
       export CHROME_EXECUTABLE=google-chrome-stable
+      export ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=latest_installed
 
       # WSL-specific configuration
       ${if isWSL then ''
@@ -183,4 +183,5 @@ in
       '' else ""}
     '';
   };
+  programs.fzf.enableZshIntegration = true;
 }
