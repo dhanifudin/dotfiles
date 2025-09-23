@@ -25,7 +25,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.align",
+    "nvim-mini/mini.align",
     event = "BufRead",
     opts = function()
       require("mini.align").setup({
