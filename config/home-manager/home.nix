@@ -54,6 +54,7 @@ in
       devTools = [
         android-tools
         ansible
+        ansible-lint
         asdf-vm
         gh
         git
@@ -78,6 +79,7 @@ in
         neovim
         pandoc
         ripgrep
+        sshpass
         silver-searcher
         starship
         superfile
