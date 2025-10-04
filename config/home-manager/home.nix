@@ -63,6 +63,8 @@ in
         jdk
         lazygit
         lua51Packages.luarocks-nix
+        mesa
+        libGL
         mdbook
         rustup
         sdkmanager
@@ -102,17 +104,24 @@ in
         arandr
         beeper
         blueman
+        bluez
         clipmenu
         dunst
         gimp
+        leftwm
+        leftwm-config
+        leftwm-theme
+        mpv
+        picom
+        polybar
         redshift
         rofi
+        scrcpy
+        scrot
         sioyek
         termius
         vscode
-        # wezterm
-        # wpsoffice
-        zoom-us
+        wpsoffice
       ];
 
       # Combine all package lists
