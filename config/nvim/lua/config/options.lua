@@ -4,4 +4,5 @@
 local set = vim.opt
 
 set.swapfile = false
+vim.g.lazyvim_picker = "fzf"
 vim.g.lazyvim_python_lsp = "basedpyright"
