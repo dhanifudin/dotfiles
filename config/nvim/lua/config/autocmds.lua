@@ -40,7 +40,20 @@ timer:start(
   end)
 )
 
--- Focus diff: when diff mode is enabled, close all non-diff windows in the tab
+-- Returns true if the window belongs to an AI panel (ClaudeCode or OpenCode)
+local function is_ai_panel(win)
+  local buf = vim.api.nvim_win_get_buf(win)
+  local ft = vim.bo[buf].filetype
+  local name = vim.api.nvim_buf_get_name(buf):lower()
+  local ai_filetypes = { claudecode = true, opencode = true }
+  if ai_filetypes[ft] then
+    return true
+  end
+  return name:find("claude") ~= nil or name:find("opencode") ~= nil
+end
+
+-- Focus diff: when diff mode is enabled, close all non-diff windows in the tab,
+-- except floating windows and AI panels (ClaudeCode, OpenCode)
 vim.api.nvim_create_autocmd("OptionSet", {
   pattern = "diff",
   group = vim.api.nvim_create_augroup("diff_focus", { clear = true }),
@@ -51,9 +64,10 @@ vim.api.nvim_create_autocmd("OptionSet", {
     vim.schedule(function()
       local wins = vim.api.nvim_tabpage_list_wins(0)
       for _, win in ipairs(wins) do
-        -- Skip floating windows and windows already in diff mode
         local cfg = vim.api.nvim_win_get_config(win)
-        if cfg.relative == "" and not vim.wo[win].diff then
+        local is_floating = cfg.relative ~= ""
+        local in_diff = vim.wo[win].diff
+        if not is_floating and not in_diff and not is_ai_panel(win) then
           pcall(vim.api.nvim_win_close, win, false)
         end
       end
