@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a LazyVim configuration for Neovim, customized for React and Node.js development with TypeScript/JavaScript ES6 support. It uses lazy.nvim as the plugin manager and follows LazyVim's standard configuration structure. 47 LazyVim extras are enabled via `lazyvim.json`.
+This is a LazyVim configuration for Neovim, customized for React and Node.js development with TypeScript/JavaScript ES6 support. It uses lazy.nvim as the plugin manager and follows LazyVim's standard configuration structure. 46 LazyVim extras are enabled via `lazyvim.json`.
 
 ## Configuration Architecture
 
@@ -47,6 +47,7 @@ Plugins are defined in individual files under `lua/plugins/`. Each plugin file s
 
 **UI**:
 
+- Dashboard with hyper theme: week header, shortcut buttons, recent projects, recent files, plugin stats
 - Neo-tree positioned on right, width 25 columns
 - Tmux integration for seamless pane navigation (Ctrl+hjkl)
 - Markdown rendering via render-markdown.nvim
@@ -126,6 +127,33 @@ Defined in `lua/config/runner.lua`. Provides terminal execution with toggleable 
 - `<leader>rct` - composer test
 - `<leader>rcd` - composer dump-autoload
 
+### Dashboard
+
+Defined in `lua/plugins/dashboard.lua`. Uses dashboard-nvim's `hyper` theme.
+
+- **Week header** — shows current day and date
+- **Shortcuts**: `f` Find File, `g` Grep Text, `p` Projects, `s` Restore Session, `c` Config, `l` Lazy, `q` Quit
+- **Project list** — 8 recent projects from project.nvim history (press entry to `Telescope find_files` in that dir)
+- **MRU** — 10 most-recently-used files (global, not cwd-only)
+- **Footer** — lazy.nvim plugin load stats and startup time
+
+### Project Detection
+
+Defined in `lua/plugins/project.lua`. Extends LazyVim's `util.project` extra with broader patterns:
+
+Detection patterns: `.git`, `package.json`, `composer.json`, `go.mod`, `Cargo.toml`, `pyproject.toml`, `setup.py`, `Makefile`, `.terraform`, `docker-compose.yml`, `docker-compose.yaml`
+
+- `<leader>fp` - Find Projects (Telescope projects picker)
+
+### Session Management
+
+Defined in `lua/plugins/project.lua` via `folke/persistence.nvim`. Sessions auto-save per directory on `BufReadPre`.
+
+- `<leader>qs` - Restore session for current directory
+- `<leader>qS` - Select from available sessions
+- `<leader>ql` - Restore last session (across all directories)
+- `<leader>qd` - Stop saving session for current session
+
 ### Emmet Support
 
 Defined in `lua/plugins/emmet.lua`. Supports HTML/CSS/JSX/TSX expansion.
@@ -160,7 +188,7 @@ Navigation between Neovim splits and tmux panes:
 ```
 ~/.config/nvim/
 ├── init.lua                        # Entry point
-├── lazyvim.json                    # LazyVim extras configuration (47 extras)
+├── lazyvim.json                    # LazyVim extras configuration (46 extras)
 ├── lazy-lock.json                  # Plugin version lock file
 ├── stylua.toml                     # Lua formatter config
 ├── .neoconf.json                   # Neoconf/LSP configuration
@@ -174,11 +202,13 @@ Navigation between Neovim splits and tmux panes:
 │   ├── plugins/                    # Plugin specifications
 │   │   ├── ai.lua                 # OpenCode + ClaudeCode AI integration
 │   │   ├── catppuccin.lua         # Theme with auto light/dark switching
+│   │   ├── dashboard.lua          # Dashboard hyper theme (week header, shortcuts, projects, MRU)
 │   │   ├── emmet.lua              # Emmet for HTML/CSS/JSX/TSX
 │   │   ├── lsp.lua                # LSP diagnostics styling
 │   │   ├── markdown.lua           # Markdown rendering
 │   │   ├── mason.lua              # Tool installer (LSP, DAP, linters, formatters)
 │   │   ├── neo-tree.lua           # File explorer (right side, width 25)
+│   │   ├── project.lua            # Project detection patterns + persistence.nvim sessions
 │   │   ├── react.lua              # React support (auto-tag, package-info)
 │   │   ├── tmux.lua               # Tmux pane navigation
 │   │   ├── typescript.lua         # TS/JS LazyVim extras

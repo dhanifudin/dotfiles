@@ -13,6 +13,19 @@ return {
         update_in_insert = false,
         severity_sort = true,
       },
+      inlay_hints = {
+        enabled = false, -- handled by nvim-lsp-endhints
+      },
+    },
+  },
+  {
+    "chrisgrieser/nvim-lsp-endhints",
+    event = "LspAttach",
+    opts = {
+      icons = {
+        type = "󰜁 ",
+        parameter = "󰏪 ",
+      },
     },
   },
 }

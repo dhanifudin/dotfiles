@@ -39,7 +39,6 @@
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.lsp.none-ls",
     "lazyvim.plugins.extras.ui.dashboard-nvim",
-    "lazyvim.plugins.extras.ui.mini-starter",
     "lazyvim.plugins.extras.util.gh",
     "lazyvim.plugins.extras.util.gitui",
     "lazyvim.plugins.extras.util.project",
