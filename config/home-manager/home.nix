@@ -52,9 +52,8 @@ in
     let
       # Development tools
       devTools = [
-        android-tools
+        # android-tools
         ansible
-        ansible-lint
         asdf-vm
         gh
         git
@@ -65,7 +64,6 @@ in
         lua51Packages.luarocks-nix
         mesa
         libGL
-        mdbook
         rustup
         sdkmanager
       ];
@@ -93,7 +91,7 @@ in
 
       # System and runtime tools
       systemTools = [
-        flutter
+        # flutter
         home-manager
         virtualgl
       ];
@@ -173,7 +171,7 @@ in
       source $ZIM_HOME/init.zsh
 
       # Configure PATH
-      export PATH="$HOME/.config/composer/vendor/bin:$HOME/bin:$HOME/.asdf/shims:$PATH"
+      export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/composer/vendor/bin:$HOME/bin:$HOME/.asdf/shims:$PATH:$HOME/.opencode/bin:$PATH"
 
       # Initialize starship prompt
       eval "$(starship init zsh)"
