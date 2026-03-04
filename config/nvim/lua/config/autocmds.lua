@@ -7,37 +7,31 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
--- Function to set theme based on time of day
+-- Function to set theme based on time of day.
+-- Only reloads the colorscheme when the background actually changes,
+-- avoiding an expensive full reload on every hourly tick.
 local function set_theme_by_time()
   local hour = tonumber(os.date("%H"))
-
-  -- Working hours: 7 AM to 6 PM (light theme)
-  -- Night time: 6 PM to 7 AM (dark theme)
-  if hour >= 7 and hour < 18 then
-    vim.o.background = "light"
-  else
-    vim.o.background = "dark"
+  local target = (hour >= 7 and hour < 18) and "light" or "dark"
+  if vim.o.background == target then
+    return
   end
-
-  -- Reload colorscheme to apply the change
+  vim.o.background = target
   vim.cmd("colorscheme catppuccin")
 end
 
 -- Set theme on startup
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    set_theme_by_time()
-  end,
+  once = true,
+  callback = set_theme_by_time,
 })
 
--- Optional: Check and update theme every hour
-local timer = vim.loop.new_timer()
+-- Check and update theme every hour (vim.uv replaces the deprecated vim.loop)
+local timer = vim.uv.new_timer()
 timer:start(
-  0,
-  3600000, -- Check every hour (3600000 ms)
-  vim.schedule_wrap(function()
-    set_theme_by_time()
-  end)
+  3600000, -- first tick after one hour; VimEnter handles startup
+  3600000,
+  vim.schedule_wrap(set_theme_by_time)
 )
 
 -- Returns true if the window belongs to an AI panel (ClaudeCode or OpenCode)

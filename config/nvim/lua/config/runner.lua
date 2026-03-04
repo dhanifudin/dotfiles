@@ -34,12 +34,12 @@ local function open_terminal(height)
 
   vim.cmd("botright " .. (height or 15) .. "split")
   state.buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option(state.buf, "bufhidden", "hide")
+  vim.bo[state.buf].bufhidden = "hide"
   state.win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_buf(state.win, state.buf)
-  vim.api.nvim_win_set_option(state.win, "number", false)
-  vim.api.nvim_win_set_option(state.win, "relativenumber", false)
-  vim.api.nvim_win_set_option(state.win, "signcolumn", "no")
+  vim.wo[state.win].number = false
+  vim.wo[state.win].relativenumber = false
+  vim.wo[state.win].signcolumn = "no"
 end
 
 local function run(cmd, opts)
@@ -48,9 +48,9 @@ local function run(cmd, opts)
 
   open_terminal(opts.height)
 
-  local shell_cmd = vim.o.shell .. " -c '" .. cmd:gsub("'", "'\\''") .. "'"
-
-  state.term_id = vim.fn.termopen(shell_cmd, {
+  -- Pass as a list so termopen does not re-invoke a shell around the command.
+  -- vim.o.shellcmdflag is typically "-c" for sh/bash/zsh/fish.
+  state.term_id = vim.fn.termopen({ vim.o.shell, vim.o.shellcmdflag, cmd }, {
     on_exit = function(_, exit_code, _)
       vim.schedule(function()
         close_terminal()

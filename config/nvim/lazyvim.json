@@ -40,7 +40,6 @@
     "lazyvim.plugins.extras.lsp.none-ls",
     "lazyvim.plugins.extras.ui.dashboard-nvim",
     "lazyvim.plugins.extras.util.gh",
-    "lazyvim.plugins.extras.util.gitui",
     "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.util.rest",
     "lazyvim.plugins.extras.vscode"
