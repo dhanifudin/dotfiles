@@ -1,6 +1,11 @@
 export LC_ALL=en_US.UTF-8
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+# Neovim profiles (NVIM_APPNAME)
+alias nvim-ai='NVIM_APPNAME=nvim-ai nvim'
+alias nai='NVIM_APPNAME=nvim-ai nvim'
+alias dhs='NVIM_APPNAME=nvim-dhs nvim'
 
 if [[ `uname` == 'Darwin' ]]
 then

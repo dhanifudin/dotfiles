@@ -1,5 +1,9 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
-require("config.lazy")
+-- Set leader keys before lazy.nvim loads (required)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
--- Load terminal runner (Dispatch, Npm, Composer)
+require("config.options")
+require("config.lazy")
+require("config.keymaps")
+require("config.autocmds")
 require("config.runner")

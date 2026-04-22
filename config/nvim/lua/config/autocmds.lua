@@ -1,38 +1,33 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
---
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
---
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
-
--- Function to set theme based on time of day.
--- Only reloads the colorscheme when the background actually changes,
--- avoiding an expensive full reload on every hourly tick.
-local function set_theme_by_time()
-  local hour = tonumber(os.date("%H"))
-  local target = (hour >= 7 and hour < 18) and "light" or "dark"
-  if vim.o.background == target then
-    return
-  end
-  vim.o.background = target
-  vim.cmd("colorscheme catppuccin")
-end
-
--- Set theme on startup
-vim.api.nvim_create_autocmd("VimEnter", {
-  once = true,
-  callback = set_theme_by_time,
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("yank_highlight", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
 
--- Check and update theme every hour (vim.uv replaces the deprecated vim.loop)
-local timer = vim.uv.new_timer()
-timer:start(
-  3600000, -- first tick after one hour; VimEnter handles startup
-  3600000,
-  vim.schedule_wrap(set_theme_by_time)
-)
+-- Resize splits when window is resized
+vim.api.nvim_create_autocmd("VimResized", {
+  group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+
+-- Close certain filetypes with q
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
+  pattern = { "help", "man", "qf", "lspinfo", "notify", "checkhealth", "query" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
+-- "Did you mean?" suggestions for mistyped filenames
+require("util.did_you_mean").setup()
 
 -- Returns true if the window belongs to an AI panel (ClaudeCode or OpenCode)
 local function is_ai_panel(win)

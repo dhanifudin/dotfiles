@@ -1,38 +1,36 @@
 return {
-  -- OpenCode integration for VS Code
   {
-    "sudo-tee/opencode.nvim",
-    cmd = { "OpenCode", "OpenCodeFile" },
-    keys = {
-      {
-        "<leader>ao",
-        "<cmd>Opencode<cr>",
-        desc = "Open Code (current file)",
-      },
-    },
-    opts = {
-      command = "code",
-      open_in_new_window = false,
-      wait = false,
-    },
+    "folke/sidekick.nvim",
     config = function(_, opts)
-      require("opencode").setup(opts)
+      require("sidekick").setup(opts)
     end,
-  },
-
-  -- Claude Code customization - position at bottom
-  {
-    "coder/claudecode.nvim",
-    optional = true,
     opts = {
-      terminal = {
-        snacks_win_opts = {
-          position = "bottom", -- Display at bottom like a drawer
-          height = 0.4, -- 40% of screen height
-          width = 1.0, -- Full width
-          border = "rounded",
+      cli = {
+        picker = "snacks",
+        mux = {
+          backend = "tmux",
+          enabled = false,
+        },
+        win = {
+          layout = "bottom",
+          split = {
+            height = 20,
+          },
         },
       },
+    },
+    keys = {
+      {
+        "<tab>",
+        function() return require("sidekick").nes_jump_or_apply() end,
+        expr = true,
+        desc = "NES jump or apply",
+      },
+      { "<leader>aa", function() require("sidekick.cli").toggle() end,            desc = "AI toggle" },
+      { "<leader>as", function() require("sidekick.cli").select() end,            desc = "AI select tool" },
+      { "<leader>ac", function() require("sidekick.cli").toggle("claude") end,    desc = "AI open Claude" },
+      { "<leader>ao", function() require("sidekick.cli").toggle("opencode") end,  desc = "AI open OpenCode" },
+      { "<leader>aq", function() require("sidekick.cli").toggle("qwen") end,      desc = "AI open Qwen" },
     },
   },
 }

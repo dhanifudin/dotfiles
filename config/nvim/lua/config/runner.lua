@@ -1,71 +1,49 @@
 -- runner.lua
--- Terminal command runner with Dispatch, Npm and Composer wrappers
--- Auto-closes terminal and sends notification on process exit
+-- Task runner (Dispatch, Npm, Composer) backed by snacks.terminal
+-- Interactive shell toggle also delegates to snacks.terminal
 
 local M = {}
 
--- ─── State ────────────────────────────────────────────────────────────────────
+-- ─── Task Win Config ──────────────────────────────────────────────────────────
 
-local state = {
-  buf = nil,
-  win = nil,
-  term_id = nil,
+local task_win = {
+  position = "bottom",
+  height = 0.3,
 }
 
--- ─── Core Terminal Runner ──────────────────────────────────────────────────────
-
-local function close_terminal()
-  if state.win and vim.api.nvim_win_is_valid(state.win) then
-    vim.api.nvim_win_close(state.win, true)
-    state.win = nil
-  end
-  if state.buf and vim.api.nvim_buf_is_valid(state.buf) then
-    vim.api.nvim_buf_delete(state.buf, { force = true })
-    state.buf = nil
-  end
-  state.term_id = nil
-end
-
-local function open_terminal(height)
-  -- Close any existing dispatch window
-  if state.win and vim.api.nvim_win_is_valid(state.win) then
-    vim.api.nvim_win_close(state.win, true)
-  end
-
-  vim.cmd("botright " .. (height or 15) .. "split")
-  state.buf = vim.api.nvim_create_buf(false, true)
-  vim.bo[state.buf].bufhidden = "hide"
-  state.win = vim.api.nvim_get_current_win()
-  vim.api.nvim_win_set_buf(state.win, state.buf)
-  vim.wo[state.win].number = false
-  vim.wo[state.win].relativenumber = false
-  vim.wo[state.win].signcolumn = "no"
-end
+-- ─── Core Task Runner ─────────────────────────────────────────────────────────
 
 local function run(cmd, opts)
   opts = opts or {}
-  local focus = opts.focus or false
 
-  open_terminal(opts.height)
-
-  -- Pass as a list so termopen does not re-invoke a shell around the command.
-  -- vim.o.shellcmdflag is typically "-c" for sh/bash/zsh/fish.
-  state.term_id = vim.fn.termopen({ vim.o.shell, vim.o.shellcmdflag, cmd }, {
-    on_exit = function(_, exit_code, _)
-      vim.schedule(function()
-        close_terminal()
-        if exit_code == 0 then
-          vim.notify("✓ '" .. cmd .. "' completed", vim.log.levels.INFO)
-        else
-          vim.notify("✗ '" .. cmd .. "' failed (exit code " .. exit_code .. ")", vim.log.levels.ERROR)
-        end
-      end)
-    end,
+  local term = Snacks.terminal.open(cmd, {
+    cwd = opts.cwd,
+    start_insert = opts.focus or false,
+    auto_insert = false,
+    auto_close = false,
+    win = task_win,
   })
 
-  vim.api.nvim_buf_set_name(state.buf, "runner: " .. cmd)
+  if term and term.buf then
+    local label = type(cmd) == "table" and cmd[#cmd] or cmd
+    vim.api.nvim_create_autocmd("TermClose", {
+      buffer = term.buf,
+      once = true,
+      callback = function()
+        local code = vim.v.event.status
+        vim.schedule(function()
+          if code == 0 then
+            term:close()
+            vim.notify("✓ '" .. label .. "' completed", vim.log.levels.INFO)
+          else
+            vim.notify("✗ '" .. label .. "' failed (exit " .. code .. ")", vim.log.levels.ERROR)
+          end
+        end)
+      end,
+    })
+  end
 
-  if not focus then
+  if not opts.focus then
     vim.cmd("wincmd p")
   end
 end
@@ -89,39 +67,26 @@ local function run_in_root(cmd, marker, label)
     vim.notify(label .. ": " .. marker .. " not found", vim.log.levels.ERROR)
     return
   end
-  run(string.format("cd '%s' && %s", root, cmd))
+  run({ vim.o.shell, vim.o.shellcmdflag, cmd }, { cwd = root })
 end
 
 -- ─── Commands ─────────────────────────────────────────────────────────────────
 
--- Dispatch
-vim.api.nvim_create_user_command("Dispatch", function(opts)
-  if opts.args == "" then
+vim.api.nvim_create_user_command("Dispatch", function(o)
+  if o.args == "" then
     vim.notify("Dispatch: No command provided", vim.log.levels.ERROR)
     return
   end
-  run(opts.args)
+  run({ vim.o.shell, vim.o.shellcmdflag, o.args })
 end, { nargs = "+", complete = "shellcmd", desc = "Run command in terminal" })
 
-vim.api.nvim_create_user_command("DispatchFocus", function(opts)
-  if opts.args == "" then
+vim.api.nvim_create_user_command("DispatchFocus", function(o)
+  if o.args == "" then
     vim.notify("Dispatch: No command provided", vim.log.levels.ERROR)
     return
   end
-  run(opts.args, { focus = true })
+  run({ vim.o.shell, vim.o.shellcmdflag, o.args }, { focus = true })
 end, { nargs = "+", complete = "shellcmd", desc = "Run command in terminal (focused)" })
-
-vim.api.nvim_create_user_command("DispatchToggle", function()
-  if state.win and vim.api.nvim_win_is_valid(state.win) then
-    vim.api.nvim_win_close(state.win, true)
-    state.win = nil
-  elseif state.buf and vim.api.nvim_buf_is_valid(state.buf) then
-    vim.cmd("botright 15split")
-    state.win = vim.api.nvim_get_current_win()
-    vim.api.nvim_win_set_buf(state.win, state.buf)
-    vim.cmd("wincmd p")
-  end
-end, { desc = "Toggle dispatch terminal" })
 
 -- Npm
 local npm_completions = {
@@ -129,12 +94,12 @@ local npm_completions = {
   "lint", "format", "update", "uninstall", "init", "publish",
 }
 
-vim.api.nvim_create_user_command("Npm", function(opts)
-  if opts.args == "" then
+vim.api.nvim_create_user_command("Npm", function(o)
+  if o.args == "" then
     vim.notify("Npm: No arguments provided", vim.log.levels.ERROR)
     return
   end
-  run_in_root("npm " .. opts.args, "package.json", "Npm")
+  run_in_root("npm " .. o.args, "package.json", "Npm")
 end, {
   nargs = "+",
   complete = function(arg_lead, cmd_line)
@@ -151,12 +116,12 @@ local composer_completions = {
   "init", "test", "run", "validate", "status", "create-project",
 }
 
-vim.api.nvim_create_user_command("Composer", function(opts)
-  if opts.args == "" then
+vim.api.nvim_create_user_command("Composer", function(o)
+  if o.args == "" then
     vim.notify("Composer: No arguments provided", vim.log.levels.ERROR)
     return
   end
-  run_in_root("composer " .. opts.args, "composer.json", "Composer")
+  run_in_root("composer " .. o.args, "composer.json", "Composer")
 end, {
   nargs = "+",
   complete = function(arg_lead, cmd_line)
@@ -172,17 +137,15 @@ end, {
 -- Dispatch
 vim.keymap.set("n", "<leader>rd", function()
   vim.ui.input({ prompt = "Dispatch: " }, function(input)
-    if input then run(input) end
+    if input then run({ vim.o.shell, vim.o.shellcmdflag, input }) end
   end)
 end, { desc = "Run dispatch command" })
 
 vim.keymap.set("n", "<leader>rf", function()
   vim.ui.input({ prompt = "Dispatch (focus): " }, function(input)
-    if input then run(input, { focus = true }) end
+    if input then run({ vim.o.shell, vim.o.shellcmdflag, input }, { focus = true }) end
   end)
 end, { desc = "Run dispatch command (focus)" })
-
-vim.keymap.set("n", "<leader>rt", "<cmd>DispatchToggle<cr>", { desc = "Toggle dispatch window" })
 
 -- Npm
 vim.keymap.set("n", "<leader>rn", function()
@@ -191,12 +154,12 @@ vim.keymap.set("n", "<leader>rn", function()
   end)
 end, { desc = "Run npm command" })
 
-vim.keymap.set("n", "<leader>rni", "<cmd>Npm install<cr>",     { desc = "Npm install" })
-vim.keymap.set("n", "<leader>rns", "<cmd>Npm start<cr>",       { desc = "Npm start" })
-vim.keymap.set("n", "<leader>rnt", "<cmd>Npm test<cr>",        { desc = "Npm test" })
-vim.keymap.set("n", "<leader>rnb", "<cmd>Npm run build<cr>",   { desc = "Npm build" })
-vim.keymap.set("n", "<leader>rnd", "<cmd>Npm run dev<cr>",     { desc = "Npm dev" })
-vim.keymap.set("n", "<leader>rnl", "<cmd>Npm run lint<cr>",    { desc = "Npm lint" })
+vim.keymap.set("n", "<leader>rni", "<cmd>Npm install<cr>",      { desc = "Npm install" })
+vim.keymap.set("n", "<leader>rns", "<cmd>Npm start<cr>",        { desc = "Npm start" })
+vim.keymap.set("n", "<leader>rnt", "<cmd>Npm test<cr>",         { desc = "Npm test" })
+vim.keymap.set("n", "<leader>rnb", "<cmd>Npm run build<cr>",    { desc = "Npm build" })
+vim.keymap.set("n", "<leader>rnd", "<cmd>Npm run dev<cr>",      { desc = "Npm dev" })
+vim.keymap.set("n", "<leader>rnl", "<cmd>Npm run lint<cr>",     { desc = "Npm lint" })
 
 -- Composer
 vim.keymap.set("n", "<leader>rc", function()
@@ -205,7 +168,9 @@ vim.keymap.set("n", "<leader>rc", function()
   end)
 end, { desc = "Run composer command" })
 
-vim.keymap.set("n", "<leader>rci", "<cmd>Composer install<cr>",      { desc = "Composer install" })
-vim.keymap.set("n", "<leader>rcu", "<cmd>Composer update<cr>",       { desc = "Composer update" })
-vim.keymap.set("n", "<leader>rct", "<cmd>Composer test<cr>",         { desc = "Composer test" })
-vim.keymap.set("n", "<leader>rcd", "<cmd>Composer dump-autoload<cr>",{ desc = "Composer dump-autoload" })
+vim.keymap.set("n", "<leader>rci", "<cmd>Composer install<cr>",       { desc = "Composer install" })
+vim.keymap.set("n", "<leader>rcu", "<cmd>Composer update<cr>",        { desc = "Composer update" })
+vim.keymap.set("n", "<leader>rct", "<cmd>Composer test<cr>",          { desc = "Composer test" })
+vim.keymap.set("n", "<leader>rcd", "<cmd>Composer dump-autoload<cr>", { desc = "Composer dump-autoload" })
+
+return M
