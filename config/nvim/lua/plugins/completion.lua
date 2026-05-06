@@ -10,6 +10,8 @@ return {
         -- Tab: accept current item (emmet expansion), advance snippet, or indent
         ["<Tab>"]   = { "accept", "snippet_forward", "fallback" },
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
+        -- Enter: accept only when item selected, otherwise insert newline
+        ["<CR>"]    = { "select_and_accept", "fallback" },
       },
       appearance = { nerd_font_variant = "mono" },
       completion = {
